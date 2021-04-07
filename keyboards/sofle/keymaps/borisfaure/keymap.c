@@ -68,7 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |   `  | F11  | F12  |   ~  |   (  |   )  |                    |      | End  |Insert| Home |   -  |   =  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |   ∨  |   =  |   -  |   +  |   {  |   }  |-------.    ,-------|   ←  |   ↓  |   ↑  |   →  |      | PgUp |
+ * |   ∨  |   =  |   -  |   +  |   {  |   }  |-------.    ,-------|   ←  | PgDn | PgUp |   →  |      | PgUp |
  * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
  * |   ∨  | Undo | Cut  | Copy | Paste|      |-------|    |-------|      | Menu |      |      |      | PgDn |
  * `-----------------------------------------/      /      \      \-----------------------------------------'
@@ -78,7 +78,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_LOWER] = LAYOUT( \
   KC_PAUSE, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                        KC_F6,   KC_F7,   KC_F8,   KC_F9,    KC_F10,  KC_DEL, \
   KC_GRV,   KC_F11,  KC_F12,  KC_TILD, KC_LPRN, KC_RPRN,                      XXXXXXX, KC_END,  KC_INS,  KC_HOME,  KC_MINS, KC_EQL, \
-  _______,  KC_EQL,  KC_PMNS, KC_PLUS, KC_LCBR, KC_RCBR,                      KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, XXXXXXX, KC_PGUP, \
+  _______,  KC_EQL,  KC_PMNS, KC_PLUS, KC_LCBR, KC_RCBR,                      KC_LEFT, KC_PGDN, KC_PGUP, KC_RIGHT, XXXXXXX, KC_PGUP, \
   _______,  KC_UNDO, KC_CUT, KC_COPY,  KC_PASTE, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, KC_MENU, XXXXXXX, XXXXXXX,  XXXXXXX, KC_PGDN, \
                       XXXXXXX, XXXXXXX, XXXXXXX, KC_LOWER, KC_SPC,   KC_ENT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX\
 ),
@@ -88,7 +88,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |   `  | F11  | F12  |   ~  |   (  |   )  |                    |      | End  | S-Ins| Home |PrtScr|   =  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |   ∨  |   =  |   _  |   +  |   {  |   }  |-------.    ,-------|   ←  | PgDn | PgDn |   →  |      | PgUp |
+ * |   ∨  |   =  |   _  |   +  |   {  |   }  |-------.    ,-------|   ←  |  ↓   |   ↑  |   →  |      | PgUp |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * |   ∨  |      |      |      |   [  |   ]  |-------|    |-------|      | Menu |      |      |      | PgDn |
  * `-----------------------------------------/      /      \      \-----------------------------------------'
@@ -98,7 +98,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_RAISE] = LAYOUT( \
   KC_PAUSE, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                       KC_F6,   KC_F7,   KC_F8,     KC_F9,    KC_F10,  KC_DEL, \
   KC_GRV,   KC_F11,  KC_F12,  KC_TILD, KC_LPRN, KC_RPRN,                     XXXXXXX, KC_END,  S(KC_INS), KC_HOME,  KC_PSCR, XXXXXXX, \
-  _______,  KC_EQL,  KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR,                     KC_LEFT, KC_PGDN, KC_PGUP,   KC_RIGHT, XXXXXXX, KC_PGUP, \
+  _______,  KC_EQL,  KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR,                     KC_LEFT, KC_DOWN, KC_UP,     KC_RIGHT, XXXXXXX, KC_PGUP, \
   _______,  XXXXXXX, XXXXXXX, XXXXXXX, KC_LBRC, KC_RBRC, XXXXXXX,   XXXXXXX, XXXXXXX, KC_MENU, XXXXXXX,   XXXXXXX,  XXXXXXX, KC_PGDN, \
                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_SPC,   KC_ENT, KC_RAISE, XXXXXXX, XXXXXXX, XXXXXXX\
 ),
