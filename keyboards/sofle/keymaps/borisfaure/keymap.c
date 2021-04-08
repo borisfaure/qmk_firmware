@@ -19,7 +19,13 @@ enum sofle_layers {
 enum custom_keycodes {
     KC_LOWER = SAFE_RANGE,
     KC_RAISE,
-    KC_FN
+    KC_FN,
+    KC_AGRV, // à
+    KC_EGRV, // è
+    KC_UGRV, // ù
+    KC_EACU, // é
+    KC_ECIR, // è
+    KC_CCED, // ç
 };
 
 uint8_t MOUSE_BUTTONS;
@@ -64,9 +70,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 /* LOWER
  * ,-----------------------------------------.                    ,-----------------------------------------.
- * | Pause|  F1  |  F2  |  F3  |  F4  |  F5  |                    |  F6  |  F7  |  F8  |  F9  | F10  | Del  |
+ * |   ~  |  F1  |  F2  |  F3  |  F4  |  F5  |                    |  F6  |  F7  |  F8  |  F9  | F10  | Del  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |   `  | F11  | F12  |   ~  |   (  |   )  |                    |      | End  |Insert| Home |   -  |   =  |
+ * |   `  | F11  | F12  |   é  |   ê  |   è  |                    |      | End  |Insert| Home |   -  |   =  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |   ∨  |   =  |   -  |   +  |   {  |   }  |-------.    ,-------|   ←  | PgDn | PgUp |   →  |      | PgUp |
  * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
@@ -76,8 +82,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *             `----------------------------------'          '------------------------------------'
  */
 [_LOWER] = LAYOUT( \
-  KC_PAUSE, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                        KC_F6,   KC_F7,   KC_F8,   KC_F9,    KC_F10,  KC_DEL, \
-  KC_GRV,   KC_F11,  KC_F12,  KC_TILD, KC_LPRN, KC_RPRN,                      XXXXXXX, KC_END,  KC_INS,  KC_HOME,  KC_MINS, KC_EQL, \
+  KC_TILD,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                        KC_F6,   KC_F7,   KC_F8,   KC_F9,    KC_F10,  KC_DEL, \
+  KC_GRV,   KC_F11,  KC_F12,  KC_EACU, KC_ECIR, KC_EGRV,                      XXXXXXX, KC_END,  KC_INS,  KC_HOME,  KC_MINS, KC_EQL, \
   _______,  KC_EQL,  KC_PMNS, KC_PLUS, KC_LCBR, KC_RCBR,                      KC_LEFT, KC_PGDN, KC_PGUP, KC_RIGHT, XXXXXXX, KC_PGUP, \
   _______,  KC_UNDO, KC_CUT, KC_COPY,  KC_PASTE, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, KC_MENU, XXXXXXX, XXXXXXX,  XXXXXXX, KC_PGDN, \
                       XXXXXXX, XXXXXXX, XXXXXXX, KC_LOWER, KC_SPC,   KC_ENT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX\
@@ -86,20 +92,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,----------------------------------------.                     ,-----------------------------------------.
  * | Pause|  F1  |  F2  |  F3  |  F4  |  F5  |                    |  F6  |  F7  |  F8  |  F9  | F10  | Del  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |   `  | F11  | F12  |   ~  |   (  |   )  |                    |      | End  | S-Ins| Home |PrtScr|   =  |
+ * |   ~  | F11  | F12  |   é  |   ê  |   è  |                    |      |  ù   | S-Ins| Home |PrtScr|   =  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |   ∨  |   =  |   _  |   +  |   {  |   }  |-------.    ,-------|   ←  |  ↓   |   ↑  |   →  |      | PgUp |
+ * |   ∨  |  à   |   _  |   ~  |   {  |   }  |-------.    ,-------|   ←  |  ↓   |   ↑  |   →  |      | PgUp |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
- * |   ∨  |      |      |      |   [  |   ]  |-------|    |-------|      | Menu |      |      |      | PgDn |
+ * |   ∨  |      |      |   ç  |   [  |   ]  |-------|    |-------|      | Menu |      |      |      | PgDn |
  * `-----------------------------------------/      /      \      \-----------------------------------------'
  *             |  [  | LGUI | LAlt |LOWER | /Space /        \Enter \  |RAISE | RAlt | RCtrl|   ]  |
  *             `----------------------------------'          '------------------------------------'
  */
 [_RAISE] = LAYOUT( \
   KC_PAUSE, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                       KC_F6,   KC_F7,   KC_F8,     KC_F9,    KC_F10,  KC_DEL, \
-  KC_GRV,   KC_F11,  KC_F12,  KC_TILD, KC_LPRN, KC_RPRN,                     XXXXXXX, KC_END,  S(KC_INS), KC_HOME,  KC_PSCR, XXXXXXX, \
-  _______,  KC_EQL,  KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR,                     KC_LEFT, KC_DOWN, KC_UP,     KC_RIGHT, XXXXXXX, KC_PGUP, \
-  _______,  XXXXXXX, XXXXXXX, XXXXXXX, KC_LBRC, KC_RBRC, XXXXXXX,   XXXXXXX, XXXXXXX, KC_MENU, XXXXXXX,   XXXXXXX,  XXXXXXX, KC_PGDN, \
+  KC_GRV,   KC_F11,  KC_F12,  KC_EACU, KC_ECIR, KC_EGRV,                     XXXXXXX, KC_UGRV, S(KC_INS), KC_HOME,  KC_PSCR, KC_EQL, \
+  _______,  KC_AGRV, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR,                     KC_LEFT, KC_DOWN, KC_UP,     KC_RIGHT, XXXXXXX, KC_PGUP, \
+  _______,  XXXXXXX, XXXXXXX, KC_CCED, KC_LBRC, KC_RBRC, XXXXXXX,   XXXXXXX, XXXXXXX, KC_MENU, XXXXXXX,   XXXXXXX,  XXXXXXX, KC_PGDN, \
                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_SPC,   KC_ENT, KC_RAISE, XXXXXXX, XXXXXXX, XXXXXXX\
 ),
 /* FN
@@ -379,6 +385,72 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 layer_on(_FN);
             } else {
                 layer_off(_FN);
+            }
+            return false;
+        case KC_AGRV:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_BIT(KC_LSFT)) {
+                    SEND_STRING(SS_UP(X_LSFT)SS_TAP(X_RALT)"`A"SS_DOWN(X_LSFT));
+                } else if (get_mods() & MOD_BIT(KC_RSFT)) {
+                    SEND_STRING(SS_UP(X_RSFT)SS_TAP(X_RALT)"`A"SS_DOWN(X_RSFT));
+                } else {
+                    SEND_STRING(SS_TAP(X_RALT)"`a");
+                }
+            }
+            return false;
+        case KC_EGRV:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_BIT(KC_LSFT)) {
+                    SEND_STRING(SS_UP(X_LSFT)SS_TAP(X_RALT)"`E"SS_DOWN(X_LSFT));
+                } else if (get_mods() & MOD_BIT(KC_RSFT)) {
+                    SEND_STRING(SS_UP(X_RSFT)SS_TAP(X_RALT)"`E"SS_DOWN(X_RSFT));
+                } else {
+                    SEND_STRING(SS_TAP(X_RALT)"`e");
+                }
+            }
+            return false;
+        case KC_UGRV:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_BIT(KC_LSFT)) {
+                    SEND_STRING(SS_UP(X_LSFT)SS_TAP(X_RALT)"`U"SS_DOWN(X_LSFT));
+                } else if (get_mods() & MOD_BIT(KC_RSFT)) {
+                    SEND_STRING(SS_UP(X_RSFT)SS_TAP(X_RALT)"`U"SS_DOWN(X_RSFT));
+                } else {
+                    SEND_STRING(SS_TAP(X_RALT)"`u");
+                }
+            }
+            return false;
+        case KC_EACU:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_BIT(KC_LSFT)) {
+                    SEND_STRING(SS_UP(X_LSFT)SS_TAP(X_RALT)"'E"SS_DOWN(X_LSFT));
+                } else if (get_mods() & MOD_BIT(KC_RSFT)) {
+                    SEND_STRING(SS_UP(X_RSFT)SS_TAP(X_RALT)"'E"SS_DOWN(X_RSFT));
+                } else {
+                    SEND_STRING(SS_TAP(X_RALT)"'e");
+                }
+            }
+            return false;
+        case KC_ECIR:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_BIT(KC_LSFT)) {
+                    SEND_STRING(SS_UP(X_LSFT)SS_TAP(X_RALT)"^E"SS_DOWN(X_LSFT));
+                } else if (get_mods() & MOD_BIT(KC_RSFT)) {
+                    SEND_STRING(SS_UP(X_RSFT)SS_TAP(X_RALT)"^E"SS_DOWN(X_RSFT));
+                } else {
+                    SEND_STRING(SS_TAP(X_RALT)"^e");
+                }
+            }
+            return false;
+        case KC_CCED:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_BIT(KC_LSFT)) {
+                    SEND_STRING(SS_UP(X_LSFT)SS_TAP(X_RALT)",C"SS_DOWN(X_LSFT));
+                } else if (get_mods() & MOD_BIT(KC_RSFT)) {
+                    SEND_STRING(SS_UP(X_RSFT)SS_TAP(X_RALT)",C"SS_DOWN(X_RSFT));
+                } else {
+                    SEND_STRING(SS_TAP(X_RALT)",c");
+                }
             }
             return false;
     }
