@@ -112,15 +112,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 /* FN
  * ,----------------------------------------.                     ,-----------------------------------------.
- * |      | F13  |      |      |      |      |                    |      |      |      |      |      |      |
+ * |      | F13  | F14  | F15  | F16  | F17  |                    | F18  | F19  | F20  | F21  | F22  |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
+ * |      | F23  | F24  |      |      |      |                    |M_ACL2|      |M_WH_U|      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------.    ,-------|      |      |      |      |      |      |
+ * |      |      | VOL_U| MUTE | VOL_D|      |-------.    ,-------|M_ACL1|M_BTN1|M_BTN2|M_BTN3|      |      |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------|    |-------|      |      |      |      |      |      |
+ * |      |      | M_PRV| PLAY | M_NXT|      |-------|    |-------|M_ACL0|      |M_WH_D|      |      |      |
  * `-----------------------------------------/      /      \      \-----------------------------------------'
- *             |     |      |      |      | /      /        \      \  |      |      |      |      |
+ *             |     |      |      |      | /      /        \      \  |      |      |  FN  |      |
  *             `----------------------------------'          '------------------------------------'
  */
   [_FN] = LAYOUT( \
@@ -128,7 +128,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   XXXXXXX, KC_F23,  KC_F24,  XXXXXXX, XXXXXXX, XXXXXXX,                     KC_ACL2, XXXXXXX, KC_WH_U, XXXXXXX, XXXXXXX, XXXXXXX, \
   XXXXXXX, XXXXXXX, KC_VOLU, KC_MUTE, KC_VOLD, XXXXXXX,                     KC_ACL1, KC_BTN1, KC_BTN3, KC_BTN2, XXXXXXX, XXXXXXX, \
   XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,   XXXXXXX, KC_ACL0, XXXXXXX, KC_WH_D, XXXXXXX, XXXXXXX, XXXXXXX, \
-                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, KC_RAISE, XXXXXXX, XXXXXXX, XXXXXXX\
+                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, KC_FN, XXXXXXX\
   )
 };
 
