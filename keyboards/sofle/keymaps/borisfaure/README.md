@@ -14,5 +14,6 @@ Adapted from foureight84' SofleKeyboard with Pimoroni Trackball
 * Change RAISE layer to be more frenchy
 * `=`, `-`, `+`, `_`, `{`, `}` are on the left home row of the main layers
 * Have Shift-Ins directly in the LOWER layer
+* PgUp/Dn on right of the keyboard on the LOWER and RAISE layers
 * Add FN layer for everything about media and mouse (along with F13-F14)
 * …

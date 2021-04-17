@@ -74,40 +74,40 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * |   ~  |  F1  |  F2  |  F3  |  F4  |  F5  |                    |  F6  |  F7  |  F8  |  F9  | F10  | Del  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |   `  | F11  | F12  |   é  |   ê  |   è  |                    |      | End  | S-Ins| Home |   -  |   =  |
+ * |   `  | F11  | F12  |   é  |   ê  |   è  |                    |      | End  | S-Ins| Home |   -  | PgUp |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |   ∨  |   =  |   -  |   +  |   {  |   }  |-------.    ,-------|   ←  | PgDn | PgUp |   →  |      | PgUp |
+ * |   ∨  |   =  |   -  |   +  |   {  |   }  |-------.    ,-------|   ←  | PgDn | PgUp |   →  |      | PgDn |
  * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
- * |   ∨  | Undo | Cut  | Copy | Paste|      |-------|    |-------|      | Menu |      |      |      | PgDn |
+ * |   ∨  | Undo | Cut  | Copy | Paste|      |-------|    |-------|      | Menu |      |      |      |   ∨  |
  * `-----------------------------------------/      /      \      \-----------------------------------------'
- *             |     |      |      |LOWER | /Space /        \Enter \  |      |      |      |   ]  |
+ *             |     |      |      |LOWER | /Space /        \Enter \  |      |      |      |      |
  *             `----------------------------------'          '------------------------------------'
  */
 [_LOWER] = LAYOUT( \
-  KC_TILD,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                        KC_F6,   KC_F7,   KC_F8,   KC_F9,    KC_F10,  KC_DEL, \
-  KC_GRV,   KC_F11,  KC_F12,  KC_EACU, KC_ECIR, KC_EGRV,                      XXXXXXX, KC_END,  S(KC_INS),  KC_HOME,  KC_MINS, KC_EQL, \
-  _______,  KC_EQL,  KC_MINS, KC_PLUS, KC_LCBR, KC_RCBR,                      KC_LEFT, KC_PGDN, KC_PGUP, KC_RIGHT, XXXXXXX, KC_PGUP, \
-  _______,  KC_UNDO, KC_CUT, KC_COPY,  KC_PASTE, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, KC_MENU, XXXXXXX, XXXXXXX,  XXXXXXX, KC_PGDN, \
+  KC_TILD,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                        KC_F6,   KC_F7,   KC_F8,     KC_F9,    KC_F10,  KC_DEL, \
+  KC_GRV,   KC_F11,  KC_F12,  KC_EACU, KC_ECIR, KC_EGRV,                      XXXXXXX, KC_END,  S(KC_INS), KC_HOME,  KC_MINS, KC_PGUP, \
+  _______,  KC_EQL,  KC_MINS, KC_PLUS, KC_LCBR, KC_RCBR,                      KC_LEFT, KC_PGDN, KC_PGUP,   KC_RIGHT, XXXXXXX, KC_PGDN, \
+  _______,  KC_UNDO, KC_CUT, KC_COPY,  KC_PASTE, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, KC_MENU, XXXXXXX,   XXXXXXX,  XXXXXXX, _______, \
                       XXXXXXX, XXXXXXX, XXXXXXX, KC_LOWER, KC_SPC,   KC_ENT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX\
 ),
 /* RAISE / French
  * ,----------------------------------------.                     ,-----------------------------------------.
  * | Pause|  F1  |  F2  |  F3  |  F4  |  F5  |                    |  F6  |  F7  |  F8  |  F9  | F10  | Del  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |   ~  | F11  | F12  |   é  |   ê  |   è  |                    |      |  ù   |  î   |  ô   |PrtScr|   =  |
+ * |   ~  | F11  | F12  |   é  |   ê  |   è  |                    |      |  ù   |  î   |  ô   |PrtScr| PgUp |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |   ∨  |  à   |   _  |   +  |   {  |   }  |-------.    ,-------|   ←  |  ↓   |   ↑  |   →  |      | PgUp |
+ * |   ∨  |  à   |   _  |   +  |   {  |   }  |-------.    ,-------|   ←  |  ↓   |   ↑  |   →  |      | PgDn |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
- * |   ∨  |      |      |   ç  |   [  |   ]  |-------|    |-------|      | Menu |      |      |      | PgDn |
+ * |   ∨  |      |      |   ç  |   [  |   ]  |-------|    |-------|      | Menu |      |      |      |   ∨  |
  * `-----------------------------------------/      /      \      \-----------------------------------------'
  *             |     |      |      |      | /Space /        \Enter \  |RAISE |      |      |      |
  *             `----------------------------------'          '------------------------------------'
  */
 [_RAISE] = LAYOUT( \
   KC_PAUSE, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                       KC_F6,   KC_F7,   KC_F8,   KC_F9,    KC_F10,  KC_DEL, \
-  KC_GRV,   KC_F11,  KC_F12,  KC_EACU, KC_ECIR, KC_EGRV,                     XXXXXXX, KC_UGRV, KC_ICIR, KC_OCIR,  KC_PSCR, KC_EQL, \
-  _______,  KC_AGRV, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR,                     KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, XXXXXXX, KC_PGUP, \
-  _______,  XXXXXXX, XXXXXXX, KC_CCED, KC_LBRC, KC_RBRC, XXXXXXX,   XXXXXXX, XXXXXXX, KC_MENU, XXXXXXX, XXXXXXX,  XXXXXXX, KC_PGDN, \
+  KC_GRV,   KC_F11,  KC_F12,  KC_EACU, KC_ECIR, KC_EGRV,                     XXXXXXX, KC_UGRV, KC_ICIR, KC_OCIR,  KC_PSCR, KC_PGUP, \
+  _______,  KC_AGRV, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR,                     KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, XXXXXXX, KC_PGDN, \
+  _______,  XXXXXXX, XXXXXXX, KC_CCED, KC_LBRC, KC_RBRC, XXXXXXX,   XXXXXXX, XXXXXXX, KC_MENU, XXXXXXX, XXXXXXX,  XXXXXXX, _______, \
                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_SPC,   KC_ENT, KC_RAISE, XXXXXXX, XXXXXXX, XXXXXXX\
 ),
 /* FN
