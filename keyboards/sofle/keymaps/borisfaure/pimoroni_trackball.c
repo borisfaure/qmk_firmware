@@ -138,20 +138,12 @@ void trackball_set_brightness(uint8_t brightness) {
     i2c_writeReg(TRACKBALL_WRITE, REG_RED, data, 4, TB_I2C_TIMEOUT);
 }
 
-#ifndef MIN
-#    define MIN(a, b) ((a) < (b) ? (a) : (b))
-#endif
-void trackball_set_hsv(uint8_t hue, uint8_t sat, uint8_t brightness) {
-    RGB rgb = hsv_to_rgb((HSV){hue, sat, brightness});
-    uint8_t white = MIN(rgb.r, MIN(rgb.g, rgb.b));
-    rgb.r -= white;
-    rgb.g -= white;
-    rgb.b -= white;
-
-    trackball_set_rgbw(rgb.r, rgb.g, rgb.b, white);
-}
-
-void trackball_set_timed_rgbw(uint8_t red, uint8_t green, uint8_t blue, uint8_t white) {
+void
+trackball_set_timed_rgbw(uint8_t red,
+                         uint8_t green,
+                         uint8_t blue,
+                         uint8_t white)
+{
     if (TRACKBALL_LED_TIMEOUT == 0) {
         return trackball_set_rgbw(red,green,blue,white);
     } else if (timer_elapsed(trackball_led_timer) > 0 && !trackball_led_timedout(trackball_led_timer)) {
