@@ -127,17 +127,6 @@ void trackball_sleep(void) {
     i2c_transmit(TRACKBALL_WRITE, data, 2, TB_I2C_TIMEOUT);
 }
 
-void trackball_set_brightness(uint8_t brightness) {
-    uint8_t data[4] = {};
-    i2c_readReg(TRACKBALL_WRITE, REG_RED, data, 4, TB_I2C_TIMEOUT);
-    for (int i=0; i<4; i++) {
-        if (data[i]) {
-            data[i] = brightness;
-        }
-    }
-    i2c_writeReg(TRACKBALL_WRITE, REG_RED, data, 4, TB_I2C_TIMEOUT);
-}
-
 void
 trackball_set_timed_rgbw(uint8_t red,
                          uint8_t green,
