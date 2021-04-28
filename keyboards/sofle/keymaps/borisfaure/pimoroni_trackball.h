@@ -9,15 +9,15 @@
 #endif
 
 #ifndef TRACKBALL_ANGLE_OFFSET
-#   define TRACKBALL_ANGLE_OFFSET 0
+#    define TRACKBALL_ANGLE_OFFSET 0
 #endif
 
 #ifndef TRACKBALL_TIMEOUT
-#   define TRACKBALL_TIMEOUT 5
+#    define TRACKBALL_TIMEOUT 5
 #endif
 
 #define TRACKBALL_WRITE ((TRACKBALL_ADDRESS << 1) | I2C_WRITE)
-#define TRACKBALL_READ  ((TRACKBALL_ADDRESS << 1) | I2C_READ)
+#define TRACKBALL_READ ((TRACKBALL_ADDRESS << 1) | I2C_READ)
 
 #define TB_I2C_TIMEOUT 100
 
@@ -38,14 +38,13 @@
 #define MSK_CTRL_FREAD 0b00000100
 #define MSK_CTRL_FWRITE 0b00001000
 
-
 typedef struct {
     int16_t x;
     int16_t y;
     int16_t h;
     int16_t v;
-    bool button_down;
-    bool button_triggered;
+    bool    button_down;
+    bool    button_triggered;
 #ifndef TRACKBALL_NO_MATH
     double vector_length;
     double angle_rad;
@@ -64,16 +63,18 @@ void trackball_read_state(uint8_t* data, uint16_t size_of_data);
 void trackball_sleep(void);
 void trackball_set_brightness(uint8_t brightness);
 void trackball_set_hsv(uint8_t hue, uint8_t sat, uint8_t brightness);
-void trackball_set_scrolling (bool scroll);
+void trackball_set_scrolling(bool scroll);
 
 trackball_state_t trackball_get_state(void);
 
 void pointing_device_init(void);
-void process_mouse_user(report_mouse_t* mouse_report, int16_t x, int16_t y, int16_t h, int16_t v);
+void process_mouse_user(report_mouse_t* mouse_report, int16_t x, int16_t y,
+                        int16_t h, int16_t v);
 void update_member(int8_t* member, int16_t* offset);
 bool has_report_changed(report_mouse_t new, report_mouse_t old);
 void process_mouse(report_mouse_t* mouse);
 void pointing_device_task(void);
 void pointing_device_send(void);
 
-void master_mouse_send(int8_t x, int8_t y, int8_t h, int8_t v, uint8_t mouse_buttons);
+void master_mouse_send(int8_t x, int8_t y, int8_t h, int8_t v,
+                       uint8_t mouse_buttons);

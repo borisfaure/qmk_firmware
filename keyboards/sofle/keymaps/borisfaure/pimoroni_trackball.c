@@ -2,34 +2,35 @@
 #include "i2c_master.h"
 
 #ifndef TRACKBALL_NO_MATH
-#include "math.h"
-#   ifndef TRACKBALL_ANGLE_OFFSET
-#   define TRACKBALL_ANGLE_OFFSET 0
-#   endif
+#    include "math.h"
+#    ifndef TRACKBALL_ANGLE_OFFSET
+#        define TRACKBALL_ANGLE_OFFSET 0
+#    endif
 #endif
 
 #ifndef TRACKBALL_ORIENTATION
-#   define TRACKBALL_ORIENTATION 2
+#    define TRACKBALL_ORIENTATION 2
 #endif
 
 #ifndef TRACKBALL_REVERSE_VSCROLL
-#   define TRACKBALL_REVERSE_VSCROLL false
+#    define TRACKBALL_REVERSE_VSCROLL false
 #endif
 
 #ifndef TRACKBALL_REVERSE_HSCROLL
-#   define TRACKBALL_REVERSE_HSCROLL false
+#    define TRACKBALL_REVERSE_HSCROLL false
 #endif
 
 #ifndef TRACKBALL_LED_TIMEOUT
-#   define TRACKBALL_LED_TIMEOUT 3000 // 0 to ignore timeout
+#    define TRACKBALL_LED_TIMEOUT 3000  // 0 to ignore timeout
 #endif
 
 #ifndef TRACKBALL_ACCELERATION_WINDOW
-#   define TRACKBALL_ACCELERATION_WINDOW 5000 // ms window to increase acceleration factor
+#    define TRACKBALL_ACCELERATION_WINDOW \
+        5000  // ms window to increase acceleration factor
 #endif
 
-bool scrolling = false;
-bool trackball_idle = true;
+bool     scrolling      = false;
+bool     trackball_idle = true;
 uint16_t trackball_led_timer;
 
 void trackball_init(void) {
@@ -45,7 +46,8 @@ void trackball_init(void) {
 bool trackball_get_interrupt(void) {
 #ifndef TRACKBALL_INTERRUPT_PIN
     uint8_t data[1] = {};
-    i2c_readReg(TRACKBALL_WRITE, REG_INTERRUPT_PIN, data, 1, TB_I2C_TIMEOUT);
+    i2c_readReg(TRACKBALL_WRITE, REG_INTERRUPT_PIN, data, 1,
+                TB_I2C_TIMEOUT);
 
     return data[0] & MASK_INTERRUPT_TRIGGERED;
 #else
@@ -53,18 +55,18 @@ bool trackball_get_interrupt(void) {
 #endif
 }
 
-void trackball_set_rgbw(uint8_t red, uint8_t green, uint8_t blue, uint8_t white) {
+void trackball_set_rgbw(uint8_t red, uint8_t green, uint8_t blue,
+                        uint8_t white) {
     uint8_t data[] = {0x00, red, green, blue, white};
     i2c_transmit(TRACKBALL_WRITE, data, 5, TB_I2C_TIMEOUT);
 }
 
 void trackball_read_state(uint8_t* data, uint16_t size_of_data) {
-    i2c_readReg(TRACKBALL_WRITE, REG_LEFT, data, size_of_data, TB_I2C_TIMEOUT);
+    i2c_readReg(TRACKBALL_WRITE, REG_LEFT, data, size_of_data,
+                TB_I2C_TIMEOUT);
 }
 
-void trackball_set_scrolling(bool scroll) {
-    scrolling = scroll;
-}
+void trackball_set_scrolling(bool scroll) { scrolling = scroll; }
 
 bool trackball_led_timedout(uint16_t elapsed) {
     return timer_elapsed(elapsed) > TRACKBALL_LED_TIMEOUT;
@@ -101,17 +103,17 @@ trackball_state_t trackball_get_state(void) {
         .v = s[2] - s[3],
         .h = s[0] - s[1],
 #endif
-        .button_down = s[4] & 0x80,
+        .button_down      = s[4] & 0x80,
         .button_triggered = s[4] & 0x01,
     };
 
 #ifndef TRACKBALL_NO_MATH
-    state.angle_rad = atan2(state.y, state.x) + TRACKBALL_ANGLE_OFFSET;
+    state.angle_rad     = atan2(state.y, state.x) + TRACKBALL_ANGLE_OFFSET;
     state.vector_length = sqrt(pow(state.x, 2) + pow(state.y, 2));
-    state.raw_x = state.x;
-    state.raw_y = state.y;
-    state.raw_h = state.h;
-    state.raw_v = state.v;
+    state.raw_x         = state.x;
+    state.raw_y         = state.y;
+    state.raw_h         = state.h;
+    state.raw_v         = state.v;
     state.x = (int16_t)(state.vector_length * cos(state.angle_rad));
     state.y = (int16_t)(state.vector_length * sin(state.angle_rad));
     state.h = (int16_t)(state.vector_length * cos(state.angle_rad));
@@ -127,30 +129,30 @@ void trackball_sleep(void) {
     i2c_transmit(TRACKBALL_WRITE, data, 2, TB_I2C_TIMEOUT);
 }
 
-void
-trackball_set_timed_rgbw(uint8_t red,
-                         uint8_t green,
-                         uint8_t blue,
-                         uint8_t white)
-{
+void trackball_set_timed_rgbw(uint8_t red, uint8_t green, uint8_t blue,
+                              uint8_t white) {
     if (TRACKBALL_LED_TIMEOUT == 0) {
-        return trackball_set_rgbw(red,green,blue,white);
-    } else if (timer_elapsed(trackball_led_timer) > 0 && !trackball_led_timedout(trackball_led_timer)) {
+        return trackball_set_rgbw(red, green, blue, white);
+    } else if (timer_elapsed(trackball_led_timer) > 0 &&
+               !trackball_led_timedout(trackball_led_timer)) {
         trackball_led_timer = timer_read();
-        trackball_set_rgbw(red,green,blue,white);
+        trackball_set_rgbw(red, green, blue, white);
     } else if (!trackball_idle) {
-        trackball_set_rgbw(red,green,blue,white);
+        trackball_set_rgbw(red, green, blue, white);
         trackball_led_timer = timer_read();
-    } else if (trackball_idle && trackball_led_timedout(trackball_led_timer)) {
-        trackball_set_rgbw(0,0,0,0);
+    } else if (trackball_idle &&
+               trackball_led_timedout(trackball_led_timer)) {
+        trackball_set_rgbw(0, 0, 0, 0);
     }
 }
 
 __attribute__((weak)) void pointing_device_init(void) {
-    trackball_set_rgbw(0,0,0,70);
+    trackball_set_rgbw(0, 0, 0, 70);
 }
 
-__attribute__((weak)) void process_mouse_user(report_mouse_t* mouse_report, int16_t x, int16_t y, int16_t h, int16_t v) {
+__attribute__((weak)) void process_mouse_user(report_mouse_t* mouse_report,
+                                              int16_t x, int16_t y,
+                                              int16_t h, int16_t v) {
     mouse_report->x = x;
     mouse_report->y = y;
     mouse_report->h = h;
@@ -169,27 +171,27 @@ __attribute__((weak)) void update_member(int8_t* member, int16_t* offset) {
     }
 }
 
-__attribute__((weak)) bool has_report_changed(report_mouse_t new, report_mouse_t old) {
-    return (new.buttons != old.buttons) ||
-           (new.x && new.x != old.x) ||
-           (new.y && new.y != old.y) ||
-           (new.h && new.h != old.h) ||
-           (new.v && new.v != old.v);
+__attribute__((weak)) bool has_report_changed(report_mouse_t new,
+                                              report_mouse_t old) {
+    return (new.buttons != old.buttons) || (new.x&& new.x != old.x) ||
+           (new.y&& new.y != old.y) || (new.h&& new.h != old.h) ||
+           (new.v&& new.v != old.v);
 }
 
-static int16_t x_offset = 0;
-static int16_t y_offset = 0;
-static int16_t v_offset = 0;
-static int16_t h_offset = 0;
-static int16_t tb_timer = 0;
-uint16_t acceleration_timer = 0;
+static int16_t x_offset           = 0;
+static int16_t y_offset           = 0;
+static int16_t v_offset           = 0;
+static int16_t h_offset           = 0;
+static int16_t tb_timer           = 0;
+uint16_t       acceleration_timer = 0;
 
 __attribute__((weak)) void process_mouse(report_mouse_t* mouse) {
     static int8_t new_x_offset = 0;
     static int8_t new_y_offset = 0;
     static int8_t new_v_offset = 0;
     static int8_t new_h_offset = 0;
-    if (trackball_get_interrupt() && (!tb_timer || timer_elapsed(tb_timer) > TRACKBALL_TIMEOUT)) {
+    if (trackball_get_interrupt() &&
+        (!tb_timer || timer_elapsed(tb_timer) > TRACKBALL_TIMEOUT)) {
         tb_timer = timer_read() | 1;
         // trigger_tapping();
         // uint8_t mods = get_mods();
@@ -197,40 +199,42 @@ __attribute__((weak)) void process_mouse(report_mouse_t* mouse) {
         trackball_state_t state = trackball_get_state();
 
         if (state.button_triggered) {
-            if(state.button_down) {
+            if (state.button_down) {
                 mouse->buttons |= MOUSE_BTN1;
             } else {
                 mouse->buttons &= ~MOUSE_BTN1;
             }
         } else {
-            float power = 1.5;
-            float var_accel = 2; //acceleration factor
-            double newlen = pow(state.vector_length, power);
+            float  power     = 1.5;
+            float  var_accel = 2;  // acceleration factor
+            double newlen    = pow(state.vector_length, power);
 
-            if (state.vector_length > 2 && (timer_elapsed(acceleration_timer) == 0 || timer_elapsed(acceleration_timer) < TRACKBALL_ACCELERATION_WINDOW)) {
+            if (state.vector_length > 2 &&
+                (timer_elapsed(acceleration_timer) == 0 ||
+                 timer_elapsed(acceleration_timer) <
+                     TRACKBALL_ACCELERATION_WINDOW)) {
                 acceleration_timer = timer_read();
-                newlen += pow(state.vector_length*var_accel, power);
+                newlen += pow(state.vector_length * var_accel, power);
             } else {
                 acceleration_timer = timer_read();
                 newlen += pow(state.vector_length, power);
             }
 
-            //newlen = pow(state.vector_length, power);
+            // newlen = pow(state.vector_length, power);
 
             x_offset += (newlen * cos(state.angle_rad));
             y_offset += (newlen * sin(state.angle_rad));
-            #if TRACKBALL_REVERSE_VSCROLL == true
+#if TRACKBALL_REVERSE_VSCROLL == true
             v_offset += (newlen * sin(state.angle_rad));
-            #else
+#else
             v_offset -= (newlen * sin(state.angle_rad));
-            #endif
-            #if TRACKBALL_REVERSE_HSCROLL == true
+#endif
+#if TRACKBALL_REVERSE_HSCROLL == true
             h_offset -= (newlen * cos(state.angle_rad));
-            #else
+#else
             h_offset += (newlen * cos(state.angle_rad));
-            #endif
+#endif
         }
-
     }
 
     while (x_offset || y_offset || h_offset || v_offset) {
@@ -250,7 +254,7 @@ __attribute__((weak)) void process_mouse(report_mouse_t* mouse) {
 __attribute__((weak)) void pointing_device_task(void) {
     report_mouse_t mouse_report = pointing_device_get_report();
 
-    trackball_set_timed_rgbw(0,0,0,70);
+    trackball_set_timed_rgbw(0, 0, 0, 70);
 
     if (!is_keyboard_left() || !is_keyboard_master()) {
         process_mouse(&mouse_report);
@@ -261,10 +265,11 @@ __attribute__((weak)) void pointing_device_task(void) {
 }
 
 __attribute__((weak)) void pointing_device_send(void) {
-    static report_mouse_t old_report = {};
-    report_mouse_t mouseReport = pointing_device_get_report();
+    static report_mouse_t old_report  = {};
+    report_mouse_t        mouseReport = pointing_device_get_report();
     if (is_keyboard_left() || is_keyboard_master()) {
-        int8_t x = mouseReport.x, y = mouseReport.y, h = mouseReport.h, v = mouseReport.v;
+        int8_t x = mouseReport.x, y = mouseReport.y, h = mouseReport.h,
+               v      = mouseReport.v;
         mouseReport.x = 0;
         mouseReport.y = 0;
         mouseReport.h = 0;
@@ -289,15 +294,16 @@ __attribute__((weak)) void pointing_device_send(void) {
         }
 
         if (!scrolling) {
-            master_mouse_send(mouseReport.x, mouseReport.y, 0, 0 , mouseReport.buttons);
+            master_mouse_send(mouseReport.x, mouseReport.y, 0, 0,
+                              mouseReport.buttons);
         } else {
-            master_mouse_send(0, 0, mouseReport.h, mouseReport.v , 0);
+            master_mouse_send(0, 0, mouseReport.h, mouseReport.v, 0);
         }
     }
     mouseReport.x = 0;
     mouseReport.y = 0;
     mouseReport.v = 0;
     mouseReport.h = 0;
-    old_report = mouseReport;
+    old_report    = mouseReport;
     pointing_device_set_report(mouseReport);
 }

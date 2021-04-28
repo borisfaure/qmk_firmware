@@ -22,9 +22,10 @@ static pin_t encoders_pad[] = ENCODERS_PAD_A;
 #endif
 
 #ifdef POINTING_DEVICE_ENABLE
-#   include "pointing_device.h"
-static int8_t   split_mouse_x = 0, split_mouse_y = 0, split_mouse_h = 0, split_mouse_v = 0;
-static uint8_t  split_mouse_buttons;
+#    include "pointing_device.h"
+static int8_t split_mouse_x = 0, split_mouse_y = 0, split_mouse_h = 0,
+              split_mouse_v = 0;
+static uint8_t split_mouse_buttons;
 #endif
 
 #ifdef OLED_DRIVER_ENABLE
@@ -50,9 +51,11 @@ typedef struct _I2C_slave_buffer_t {
 #    endif
 } I2C_slave_buffer_t;
 
-static I2C_slave_buffer_t *const i2c_buffer = (I2C_slave_buffer_t *)i2c_slave_reg;
+static I2C_slave_buffer_t *const i2c_buffer =
+    (I2C_slave_buffer_t *)i2c_slave_reg;
 
-#    define I2C_BACKLIGHT_START offsetof(I2C_slave_buffer_t, backlight_level)
+#    define I2C_BACKLIGHT_START \
+        offsetof(I2C_slave_buffer_t, backlight_level)
 #    define I2C_RGB_START offsetof(I2C_slave_buffer_t, rgblight_sync)
 #    define I2C_KEYMAP_START offsetof(I2C_slave_buffer_t, smatrix)
 #    define I2C_ENCODER_START offsetof(I2C_slave_buffer_t, encoder_state)
@@ -66,13 +69,15 @@ static I2C_slave_buffer_t *const i2c_buffer = (I2C_slave_buffer_t *)i2c_slave_re
 
 // Get rows from other half over i2c
 bool transport_master(matrix_row_t matrix[]) {
-    i2c_readReg(SLAVE_I2C_ADDRESS, I2C_KEYMAP_START, (void *)matrix, sizeof(i2c_buffer->smatrix), TIMEOUT);
+    i2c_readReg(SLAVE_I2C_ADDRESS, I2C_KEYMAP_START, (void *)matrix,
+                sizeof(i2c_buffer->smatrix), TIMEOUT);
 
     // write backlight info
 #    ifdef BACKLIGHT_ENABLE
     uint8_t level = is_backlight_enabled() ? get_backlight_level() : 0;
     if (level != i2c_buffer->backlight_level) {
-        if (i2c_writeReg(SLAVE_I2C_ADDRESS, I2C_BACKLIGHT_START, (void *)&level, sizeof(level), TIMEOUT) >= 0) {
+        if (i2c_writeReg(SLAVE_I2C_ADDRESS, I2C_BACKLIGHT_START,
+                         (void *)&level, sizeof(level), TIMEOUT) >= 0) {
             i2c_buffer->backlight_level = level;
         }
     }
@@ -82,21 +87,27 @@ bool transport_master(matrix_row_t matrix[]) {
     if (rgblight_get_change_flags()) {
         rgblight_syncinfo_t rgblight_sync;
         rgblight_get_syncinfo(&rgblight_sync);
-        if (i2c_writeReg(SLAVE_I2C_ADDRESS, I2C_RGB_START, (void *)&rgblight_sync, sizeof(rgblight_sync), TIMEOUT) >= 0) {
+        if (i2c_writeReg(SLAVE_I2C_ADDRESS, I2C_RGB_START,
+                         (void *)&rgblight_sync, sizeof(rgblight_sync),
+                         TIMEOUT) >= 0) {
             rgblight_clear_change_flags();
         }
     }
 #    endif
 
 #    ifdef ENCODER_ENABLE
-    i2c_readReg(SLAVE_I2C_ADDRESS, I2C_ENCODER_START, (void *)i2c_buffer->encoder_state, sizeof(i2c_buffer->encoder_state), TIMEOUT);
+    i2c_readReg(SLAVE_I2C_ADDRESS, I2C_ENCODER_START,
+                (void *)i2c_buffer->encoder_state,
+                sizeof(i2c_buffer->encoder_state), TIMEOUT);
     encoder_update_raw(i2c_buffer->encoder_state);
 #    endif
 
 #    ifdef WPM_ENABLE
     uint8_t current_wpm = get_current_wpm();
     if (current_wpm != i2c_buffer->current_wpm) {
-        if (i2c_writeReg(SLAVE_I2C_ADDRESS, I2C_WPM_START, (void *)&current_wpm, sizeof(current_wpm), TIMEOUT) >= 0) {
+        if (i2c_writeReg(SLAVE_I2C_ADDRESS, I2C_WPM_START,
+                         (void *)&current_wpm, sizeof(current_wpm),
+                         TIMEOUT) >= 0) {
             i2c_buffer->current_wpm = current_wpm;
         }
     }
@@ -106,7 +117,8 @@ bool transport_master(matrix_row_t matrix[]) {
 
 void transport_slave(matrix_row_t matrix[]) {
     // Copy matrix to I2C buffer
-    memcpy((void *)i2c_buffer->smatrix, (void *)matrix, sizeof(i2c_buffer->smatrix));
+    memcpy((void *)i2c_buffer->smatrix, (void *)matrix,
+           sizeof(i2c_buffer->smatrix));
 
 // Read Backlight Info
 #    ifdef BACKLIGHT_ENABLE
@@ -139,7 +151,8 @@ void transport_slave_init(void) { i2c_slave_init(SLAVE_I2C_ADDRESS); }
 #    include "serial.h"
 
 typedef struct _Serial_s2m_buffer_t {
-    // TODO: if MATRIX_COLS > 8 change to uint8_t packed_matrix[] for pack/unpack
+    // TODO: if MATRIX_COLS > 8 change to uint8_t packed_matrix[] for
+    // pack/unpack
     matrix_row_t smatrix[ROWS_PER_HAND];
 
 #    ifdef ENCODER_ENABLE
@@ -154,13 +167,13 @@ typedef struct _Serial_s2m_buffer_t {
 
 typedef struct _Serial_m2s_buffer_t {
 #    ifdef BACKLIGHT_ENABLE
-    uint8_t backlight_level;
+    uint8_t       backlight_level;
 #    endif
 #    ifdef WPM_ENABLE
-    uint8_t current_wpm;
+    uint8_t       current_wpm;
 #    endif
 #    ifdef OLED_DRIVER_ENABLE
-    bool oled_on;
+    bool          oled_on;
 #    endif
     layer_state_t t_layer_state;
     layer_state_t t_default_layer_state;
@@ -206,14 +219,20 @@ SSTD_t transactions[] = {
 #    if defined(RGBLIGHT_ENABLE) && defined(RGBLIGHT_SPLIT)
     [PUT_RGBLIGHT] =
         {
-            (uint8_t *)&status_rgblight, sizeof(serial_rgblight), (uint8_t *)&serial_rgblight, 0, NULL  // no slave to master transfer
+            (uint8_t *)&status_rgblight, sizeof(serial_rgblight),
+            (uint8_t *)&serial_rgblight, 0,
+            NULL  // no slave to master transfer
         },
 #    endif
 };
 
-void transport_master_init(void) { soft_serial_initiator_init(transactions, TID_LIMIT(transactions)); }
+void transport_master_init(void) {
+    soft_serial_initiator_init(transactions, TID_LIMIT(transactions));
+}
 
-void transport_slave_init(void) { soft_serial_target_init(transactions, TID_LIMIT(transactions)); }
+void transport_slave_init(void) {
+    soft_serial_target_init(transactions, TID_LIMIT(transactions));
+}
 
 #    if defined(RGBLIGHT_ENABLE) && defined(RGBLIGHT_SPLIT)
 
@@ -221,7 +240,8 @@ void transport_slave_init(void) { soft_serial_target_init(transactions, TID_LIMI
 
 void transport_rgblight_master(void) {
     if (rgblight_get_change_flags()) {
-        rgblight_get_syncinfo((rgblight_syncinfo_t *)&serial_rgblight.rgblight_sync);
+        rgblight_get_syncinfo(
+            (rgblight_syncinfo_t *)&serial_rgblight.rgblight_sync);
         if (soft_serial_transaction(PUT_RGBLIGHT) == TRANSACTION_END) {
             rgblight_clear_change_flags();
         }
@@ -230,7 +250,8 @@ void transport_rgblight_master(void) {
 
 void transport_rgblight_slave(void) {
     if (status_rgblight == TRANSACTION_ACCEPTED) {
-        rgblight_update_sync((rgblight_syncinfo_t *)&serial_rgblight.rgblight_sync, false);
+        rgblight_update_sync(
+            (rgblight_syncinfo_t *)&serial_rgblight.rgblight_sync, false);
         status_rgblight = TRANSACTION_END;
     }
 }
@@ -259,7 +280,8 @@ bool transport_master(matrix_row_t matrix[]) {
 
 #    ifdef BACKLIGHT_ENABLE
     // Write backlight level for slave to read
-    serial_m2s_buffer.backlight_level = is_backlight_enabled() ? get_backlight_level() : 0;
+    serial_m2s_buffer.backlight_level =
+        is_backlight_enabled() ? get_backlight_level() : 0;
 #    endif
 
 #    ifdef ENCODER_ENABLE
@@ -282,10 +304,10 @@ bool transport_master(matrix_row_t matrix[]) {
     }
 #    endif
 #    ifdef OLED_DRIVER_ENABLE
-    serial_m2s_buffer.oled_on = is_oled_on();
+    serial_m2s_buffer.oled_on               = is_oled_on();
 #    endif
-    serial_m2s_buffer.t_layer_state           = layer_state;
-    serial_m2s_buffer.t_default_layer_state   = default_layer_state;
+    serial_m2s_buffer.t_layer_state         = layer_state;
+    serial_m2s_buffer.t_default_layer_state = default_layer_state;
     return true;
 }
 
@@ -308,10 +330,10 @@ void transport_slave(matrix_row_t matrix[]) {
 #    endif
 #    ifdef POINTING_DEVICE_ENABLE
     if (!is_keyboard_left()) {
-        serial_s2m_buffer.mouse_x = split_mouse_x;
-        serial_s2m_buffer.mouse_y = split_mouse_y;
-        serial_s2m_buffer.mouse_h = split_mouse_h;
-        serial_s2m_buffer.mouse_v = split_mouse_v;
+        serial_s2m_buffer.mouse_x       = split_mouse_x;
+        serial_s2m_buffer.mouse_y       = split_mouse_y;
+        serial_s2m_buffer.mouse_h       = split_mouse_h;
+        serial_s2m_buffer.mouse_v       = split_mouse_v;
         serial_s2m_buffer.mouse_buttons = split_mouse_buttons;
     }
 #    endif
@@ -334,11 +356,12 @@ void transport_slave(matrix_row_t matrix[]) {
 #endif
 
 #ifdef POINTING_DEVICE_ENABLE
-void master_mouse_send(int8_t x, int8_t y, int8_t h, int8_t v, uint8_t buttons) {
-    split_mouse_x = x;
-    split_mouse_y = y;
-    split_mouse_h = h;
-    split_mouse_v = v;
+void master_mouse_send(int8_t x, int8_t y, int8_t h, int8_t v,
+                       uint8_t buttons) {
+    split_mouse_x       = x;
+    split_mouse_y       = y;
+    split_mouse_h       = h;
+    split_mouse_v       = v;
     split_mouse_buttons = buttons;
 }
 #endif
