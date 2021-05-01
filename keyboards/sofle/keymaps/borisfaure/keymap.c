@@ -28,6 +28,9 @@ enum custom_keycodes {
     KC_ICIR,  // î
     KC_OCIR,  // ô
     KC_CCED,  // ç
+    KC_MB1,
+    KC_MB2,
+    KC_MB3,
 };
 
 uint8_t  MOUSE_BUTTONS;
@@ -128,7 +131,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_FN] = LAYOUT( \
   XXXXXXX, KC_F13,  KC_F14,  KC_F15,  KC_F16,  KC_F17,                      KC_F18,  KC_F19,  KC_F20,  KC_F21,  KC_F22,  XXXXXXX, \
   XXXXXXX, KC_F23,  KC_F24,  XXXXXXX, XXXXXXX, XXXXXXX,                     KC_ACL2, XXXXXXX, KC_WH_U, XXXXXXX, XXXXXXX, XXXXXXX, \
-  XXXXXXX, XXXXXXX, KC_VOLU, KC_MUTE, KC_VOLD, XXXXXXX,                     KC_ACL1, KC_BTN1, KC_BTN3, KC_BTN2, XXXXXXX, XXXXXXX, \
+  XXXXXXX, XXXXXXX, KC_VOLU, KC_MUTE, KC_VOLD, XXXXXXX,                     KC_ACL1, KC_MB1,  KC_MB3,  KC_MB2, XXXXXXX, XXXXXXX, \
   XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,   XXXXXXX, KC_ACL0, XXXXXXX, KC_WH_D, XXXXXXX, XXXXXXX, XXXXXXX, \
                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, KC_FN, XXXXXXX\
   )
@@ -139,15 +142,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 void pointing_device_task() {
     report_mouse_t mouse_report = pointing_device_get_report();
 
-    if (layer_state_is(_FN)) {
-        mouse_report.buttons = MOUSE_BUTTONS;
-    }
-
     trackball_set_timed_rgbw(0, 0, 0, 80);
 
     if (!is_keyboard_left() || !is_keyboard_master()) {
         process_mouse(&mouse_report);
     }
+
+    mouse_report.buttons = MOUSE_BUTTONS;
 
     switch (get_highest_layer(layer_state)) {
         case _QWERTY:
@@ -531,6 +532,27 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 } else {
                     SEND_STRING(SS_TAP(X_RALT) ",c");
                 }
+            }
+            return false;
+        case KC_MB1:
+            if (record->event.pressed) {
+                MOUSE_BUTTONS |= (1 << 0);
+            } else {
+                MOUSE_BUTTONS &= ~(1 << 0);
+            }
+            return false;
+        case KC_MB2:
+            if (record->event.pressed) {
+                MOUSE_BUTTONS |= (1 << 1);
+            } else {
+                MOUSE_BUTTONS &= ~(1 << 1);
+            }
+            return false;
+        case KC_MB3:
+            if (record->event.pressed) {
+                MOUSE_BUTTONS |= (1 << 2);
+            } else {
+                MOUSE_BUTTONS &= ~(1 << 2);
             }
             return false;
     }
