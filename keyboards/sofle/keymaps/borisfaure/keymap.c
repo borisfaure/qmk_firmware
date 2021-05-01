@@ -85,7 +85,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
  * |   ∨  | Undo | Cut  | Copy | Paste|      |-------|    |-------|      | Menu |      |      |      |   ∨  |
  * `-----------------------------------------/      /      \      \-----------------------------------------'
- *             |     |      |      |LOWER | /Space /        \Enter \  |      |      |      |      |
+ *             |     |      |      |LOWER | /Space /        \ MB1  \  |      |      |      |      |
  *             `----------------------------------'          '------------------------------------'
  */
 [_LOWER] = LAYOUT( \
@@ -93,7 +93,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_GRV,   KC_F11,  KC_F12,  KC_EACU, KC_ECIR, KC_EGRV,                      XXXXXXX, KC_END,  S(KC_INS), KC_HOME,  KC_MINS, KC_PGUP, \
   _______,  KC_EQL,  KC_MINS, KC_PLUS, KC_LCBR, KC_RCBR,                      KC_LEFT, KC_PGDN, KC_PGUP,   KC_RIGHT, XXXXXXX, KC_PGDN, \
   _______,  KC_UNDO, KC_CUT, KC_COPY,  KC_PASTE, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, KC_MENU, XXXXXXX,   XXXXXXX,  XXXXXXX, _______, \
-                      XXXXXXX, XXXXXXX, XXXXXXX, KC_LOWER, KC_SPC,   KC_ENT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX\
+                      XXXXXXX, XXXXXXX, XXXXXXX, KC_LOWER, KC_SPC,   KC_MB1, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX\
 ),
 /* RAISE / French
  * ,----------------------------------------.                     ,-----------------------------------------.

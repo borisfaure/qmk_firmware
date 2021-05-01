@@ -16,4 +16,5 @@ Adapted from foureight84' SofleKeyboard with Pimoroni Trackball
 * Have Shift-Ins directly in the LOWER layer
 * PgUp/Dn on right of the keyboard on the LOWER and RAISE layers
 * Add FN layer for everything about media and mouse (along with F13-F14)
+* Enter on LOWER layer does mouse left click
 * …
