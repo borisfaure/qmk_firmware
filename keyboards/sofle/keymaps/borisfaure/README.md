@@ -19,4 +19,5 @@ Adapted from foureight84' SofleKeyboard with Pimoroni Trackball
 * Enter on LOWER layer does mouse left click
 * Have A/; to act as Ctrl when held. Same for z// to act as Shift and w/o to
 act as GUI
+* LOWER acts as Tab if tapped, Raise acts as Backspace
 * …
