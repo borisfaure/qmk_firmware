@@ -20,4 +20,5 @@ Adapted from foureight84' SofleKeyboard with Pimoroni Trackball
 * Have A/; to act as Ctrl when held. Same for z// to act as Shift and w/o to
 act as GUI
 * LOWER acts as Tab if tapped, Raise acts as Backspace
+* Add Numbers layer on N/B
 * …

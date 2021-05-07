@@ -14,6 +14,7 @@ enum sofle_layers {
     _LOWER,
     _RAISE,
     _FN,
+    _NUMBERS,
 };
 
 enum custom_keycodes {
@@ -51,6 +52,13 @@ uint16_t trackball_led_timer;
  *             |     |      |      |      | /      /        \      \  |      |      |      |      |
  *             `----------------------------------'          '------------------------------------'
  */
+#if 0
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+  XXXXXXX, _______, _______, _______, _______, _______,                     _______, _______, _______, _______, _______, XXXXXXX, \
+  XXXXXXX, _______, _______, _______, _______, _______,                     _______, _______, _______, _______, _______, XXXXXXX, \
+  XXXXXXX, _______, _______, _______, _______, _______, XXXXXXX,   XXXXXXX, _______, _______, _______, _______, _______, XXXXXXX, \
+                    XXXXXXX, XXXXXXX, XXXXXXX, _______, _______,   _______, _______, XXXXXXX, XXXXXXX, XXXXXXX
+#endif
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*
@@ -74,18 +82,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #define KC_STRS RSFT_T(KC_SLSH)
 #define KC_GUIO RGUI_T(KC_O)
 #define KC_RSE LT(_RAISE, KC_BSPC)
+#define NUM_N LT(_NUMBERS, KC_N)
 
 /* left hand */
 #define KC_CTLA LCTL_T(KC_A)
 #define KC_LSHZ LSFT_T(KC_Z)
 #define KC_GUIW LGUI_T(KC_W)
 #define KC_LWR LT(_LOWER, KC_TAB)
+#define NUM_B LT(_NUMBERS, KC_B)
 
 [_QWERTY] = LAYOUT( \
-  KC_ESC,   KC_1,    KC_2,    KC_3,  KC_4,  KC_5,                         KC_6,  KC_7, KC_8,    KC_9,    KC_0,    KC_BSPC, \
-  KC_TAB,   KC_Q,    KC_GUIW, KC_E,  KC_R,  KC_T,                         KC_Y,  KC_U, KC_I,    KC_GUIO, KC_P,    KC_BSLS, \
-  KC_LCTRL, KC_CTLA, KC_S,    KC_D,  KC_F,  KC_G,                         KC_H,  KC_J, KC_K,    KC_L,    KC_CTRS, KC_CTRQ, \
-  KC_LSFT,  KC_LSHZ, KC_X,    KC_C,  KC_V,  KC_B, KC_MUTE,       XXXXXXX, KC_N,  KC_M, KC_COMM, KC_DOT,  KC_STRS, KC_RSFT, \
+  KC_ESC,   KC_1,    KC_2,    KC_3,  KC_4,  KC_5,                          KC_6,  KC_7, KC_8,    KC_9,    KC_0,    KC_BSPC, \
+  KC_TAB,   KC_Q,    KC_GUIW, KC_E,  KC_R,  KC_T,                          KC_Y,  KC_U, KC_I,    KC_GUIO, KC_P,    KC_BSLS, \
+  KC_LCTRL, KC_CTLA, KC_S,    KC_D,  KC_F,  KC_G,                          KC_H,  KC_J, KC_K,    KC_L,    KC_CTRS, KC_CTRQ, \
+  KC_LSFT,  KC_LSHZ, KC_X,    KC_C,  KC_V,  NUM_B, KC_MUTE,       XXXXXXX, NUM_N,  KC_M, KC_COMM, KC_DOT,  KC_STRS, KC_RSFT, \
                  KC_LBRC ,KC_LGUI, KC_LALT, KC_LWR, KC_SPC,      KC_ENT, KC_RSE, KC_RALT, KC_FN, KC_RBRC \
 ),
 /* LOWER
@@ -147,6 +157,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   XXXXXXX, XXXXXXX, KC_VOLU, KC_MUTE, KC_VOLD, XXXXXXX,                     KC_ACL1, KC_MB1,  KC_MB3,  KC_MB2, XXXXXXX, XXXXXXX, \
   XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,   XXXXXXX, KC_ACL0, XXXXXXX, KC_WH_D, XXXXXXX, XXXXXXX, XXXXXXX, \
                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, KC_FN, XXXXXXX\
+  ),
+/* Numbers
+ * ,----------------------------------------.                     ,-----------------------------------------.
+ * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * |      |  0   |  1   |   2  |  3   |   +  |                    |   0  |  1   |  2   |   3  |   +  |      |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * |      |  /   |  4   |   5  |  6   |   -  |-------.    ,-------|   /  |  4   |  5   |   6  |   -  |      |
+ * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
+ * |      |  *   |  7   |   8  |  9   |      |-------|    |-------|      |  7   |  8   |   9  |   =  |      |
+ * `-----------------------------------------/      /      \      \-----------------------------------------'
+ *             |     |      |      |      | /      /        \      \  |      |      |      |      |
+ *             `----------------------------------'          '------------------------------------'
+ */
+  [_NUMBERS] = LAYOUT( \
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+  XXXXXXX,    KC_0,    KC_1,    KC_2,    KC_3,    KC_0,                        KC_0,    KC_1,    KC_2,    KC_3, KC_PLUS, XXXXXXX, \
+  XXXXXXX, KC_STRS,    KC_4,    KC_5,    KC_6, KC_PLUS,                     KC_STRS,    KC_4,    KC_5,    KC_6, KC_MINS, XXXXXXX, \
+  XXXXXXX, KC_ASTR,    KC_7,    KC_8,    KC_9, KC_MINS, XXXXXXX,   XXXXXXX, XXXXXXX,    KC_7,    KC_8,    KC_9,  KC_EQL, XXXXXXX, \
+                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX\
   )
 };
 // clang-format on
@@ -175,6 +205,9 @@ void pointing_device_task() {
             break;
         case _FN:
             trackball_set_rgbw(153, 0, 110, 0);
+            break;
+        case _NUMBERS:
+            trackball_set_rgbw(255, 0, 0, 0);
             break;
         default:
             trackball_set_timed_rgbw(0, 0, 0, 80);
@@ -211,6 +244,9 @@ static void print_status_narrow(void) {
             break;
         case _FN:
             oled_write_P(PSTR("Function\n"), false);
+            break;
+        case _NUMBERS:
+            oled_write_P(PSTR("Numbers\n"), false);
             break;
         default:
             oled_write_ln_P(PSTR("Undef"), false);
