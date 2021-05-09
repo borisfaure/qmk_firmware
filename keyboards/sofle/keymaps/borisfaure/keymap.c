@@ -5,8 +5,6 @@
 
 #ifdef OLED_DRIVER_ENABLE
 #    include <stdio.h>
-
-char wpm_str[4];
 #endif
 
 enum sofle_layers {
@@ -18,9 +16,9 @@ enum sofle_layers {
 };
 
 enum custom_keycodes {
-    KC_LOWER = SAFE_RANGE,
-    KC_RAISE,
-    KC_MISC,
+    KC_MB1 = SAFE_RANGE,
+    KC_MB2,
+    KC_MB3,
     KC_AGRV,  // à
     KC_EGRV,  // è
     KC_UGRV,  // ù
@@ -29,9 +27,6 @@ enum custom_keycodes {
     KC_ICIR,  // î
     KC_OCIR,  // ô
     KC_CCED,  // ç
-    KC_MB1,
-    KC_MB2,
-    KC_MB3,
 };
 
 uint8_t  MOUSE_BUTTONS;
@@ -100,7 +95,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,   KC_Q,    KC_GUIW, KC_E,  KC_R,  MISC_T,                       MISC_Y,  KC_U, KC_I,    KC_GUIO, KC_P,    KC_BSLS, \
   KC_LCTRL, KC_CTLA, KC_S,    KC_D,  KC_F,  KC_G,                           KC_H,  KC_J, KC_K,    KC_L,    KC_CTRS, KC_CTRQ, \
   KC_LSFT,  KC_LSHZ, ALT_X,   KC_C,  KC_V,  NUM_B, KC_MUTE,       XXXXXXX, NUM_N,  KC_M, KC_COMM, ALT_DOT, KC_STRS, KC_RSFT, \
-                 KC_LBRC ,KC_LGUI, KC_LALT, KC_LWR, KC_SPC,      KC_ENT, KC_RSE, KC_RALT, KC_MISC, KC_RBRC \
+                 KC_LBRC ,KC_LGUI, KC_LALT, KC_LWR, KC_SPC,      KC_ENT, KC_RSE, KC_RALT, MO(_MISC), KC_RBRC \
 ),
 /* LOWER / Symbols
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -269,20 +264,6 @@ void oled_task_user(void) { print_status_narrow(); }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case KC_LOWER:
-            if (record->event.pressed) {
-                layer_on(_LOWER);
-            } else {
-                layer_off(_LOWER);
-            }
-            return false;
-        case KC_RAISE:
-            if (record->event.pressed) {
-                layer_on(_RAISE);
-            } else {
-                layer_off(_RAISE);
-            }
-            return false;
         case KC_AGRV:
             if (record->event.pressed) {
                 if (get_mods() & MOD_BIT(KC_LSFT)) {
