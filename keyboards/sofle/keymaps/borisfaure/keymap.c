@@ -15,13 +15,11 @@ enum sofle_layers {
     _RAISE,
     _MISC,
     _NUMBERS,
-    _FN,
 };
 
 enum custom_keycodes {
     KC_LOWER = SAFE_RANGE,
     KC_RAISE,
-    KC_FN,
     KC_MISC,
     KC_AGRV,  // à
     KC_EGRV,  // è
@@ -74,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
  * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |RShift|
  * `-----------------------------------------/      /      \      \-----------------------------------------'
- *             |  [  | LGUI | LAlt |LOWER | /Space /        \Enter \  |RAISE | RAlt |  FN  |   ]  |
+ *             |  [  | LGUI | LAlt |LOWER | /Space /        \Enter \  |RAISE | RAlt | MISC |   ]  |
  *             `----------------------------------'          '------------------------------------'
  */
 
@@ -86,7 +84,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #define ALT_DOT LALT_T(KC_DOT)
 #define KC_RSE LT(_RAISE, KC_BSPC)
 #define NUM_N LT(_NUMBERS, KC_N)
-#define FN_Y LT(_FN, KC_Y)
+#define MISC_Y LT(_MISC, KC_Y)
 
 /* left hand */
 #define KC_CTLA LCTL_T(KC_A)
@@ -95,14 +93,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #define ALT_X LALT_T(KC_X)
 #define KC_LWR LT(_LOWER, KC_TAB)
 #define NUM_B LT(_NUMBERS, KC_B)
-#define FN_T LT(_FN, KC_T)
+#define MISC_T LT(_MISC, KC_T)
 
 [_QWERTY] = LAYOUT( \
-  KC_ESC,   KC_1,    KC_2,    KC_3,  KC_4,  KC_5,                          KC_6,   KC_7, KC_8,    KC_9,    KC_0,    KC_BSPC, \
-  KC_TAB,   KC_Q,    KC_GUIW, KC_E,  KC_R,  FN_T,                          FN_Y,   KC_U, KC_I,    KC_GUIO, KC_P,    KC_BSLS, \
-  KC_LCTRL, KC_CTLA, KC_S,    KC_D,  KC_F,  KC_G,                          KC_H,   KC_J, KC_K,    KC_L,    KC_CTRS, KC_CTRQ, \
+  KC_ESC,   KC_1,    KC_2,    KC_3,  KC_4,  KC_5,                           KC_6,  KC_7, KC_8,    KC_9,    KC_0,    KC_BSPC, \
+  KC_TAB,   KC_Q,    KC_GUIW, KC_E,  KC_R,  MISC_T,                       MISC_Y,  KC_U, KC_I,    KC_GUIO, KC_P,    KC_BSLS, \
+  KC_LCTRL, KC_CTLA, KC_S,    KC_D,  KC_F,  KC_G,                           KC_H,  KC_J, KC_K,    KC_L,    KC_CTRS, KC_CTRQ, \
   KC_LSFT,  KC_LSHZ, ALT_X,   KC_C,  KC_V,  NUM_B, KC_MUTE,       XXXXXXX, NUM_N,  KC_M, KC_COMM, ALT_DOT, KC_STRS, KC_RSFT, \
-                 KC_LBRC ,KC_LGUI, KC_LALT, KC_LWR, KC_SPC,      KC_ENT, KC_RSE, KC_RALT, KC_FN, KC_RBRC \
+                 KC_LBRC ,KC_LGUI, KC_LALT, KC_LWR, KC_SPC,      KC_ENT, KC_RSE, KC_RALT, KC_MISC, KC_RBRC \
 ),
 /* LOWER / Symbols
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -114,7 +112,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
  * |   ∨  |  @   |   &  |   %  |   [  |   ]  |-------|    |-------|  End | Menu | Home |   '  |  '   |   ∨  |
  * `-----------------------------------------/      /      \      \-----------------------------------------'
- *             |     |      |      |      | / RAlt /        \ MB1  \  | MISC_DEL|      |      |      |
+ *             |     |      |      |      | / RAlt /        \ MB1  \  |MISC_DEL|     |     |      |
  *             `----------------------------------'          '------------------------------------'
  */
 #define MISCDEL LT(_MISC, KC_DEL)
@@ -135,7 +133,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * |   ∨  |      |      |   ç  |   [  |   ]  |-------|    |-------| End  | Menu | Home | Pause|  "   |   ∨  |
  * `-----------------------------------------/      /      \      \-----------------------------------------'
- *             |     |      |      | MISC | /Space /        \Enter \  |RAISE |      |      |      |
+ *             |     |      |      |  DEL | /Space /        \Enter \  |RAISE |      |      |      |
  *             `----------------------------------'          '------------------------------------'
  */
 [_RAISE] = LAYOUT( \
@@ -143,7 +141,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_GRV,   KC_EXLM, KC_HASH, KC_EACU, KC_ECIR, KC_EGRV,                     KC_DQUO, KC_UGRV, KC_ICIR, KC_OCIR,  KC_PSCR, KC_PGUP, \
   _______,  KC_AGRV, KC_UNDS, KC_PLUS, KC_AMPR, KC_PIPE,                     KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, KC_DQUO, KC_PGDN, \
   _______,  XXXXXXX, XXXXXXX, KC_CCED, KC_LBRC, KC_RBRC, XXXXXXX,   XXXXXXX,  KC_END, KC_MENU, KC_HOME, KC_PAUS,  KC_DQUO, _______, \
-                      XXXXXXX, XXXXXXX, XXXXXXX, MO(_MISC), KC_SPC,   KC_ENT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX\
+                      XXXXXXX, XXXXXXX, XXXXXXX, KC_DEL, KC_SPC,    KC_ENT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX\
 ),
 /* MISC (Media/Mouse)
  * ,----------------------------------------.                     ,-----------------------------------------.
@@ -155,7 +153,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * |      |      | M_PRV| PLAY | M_NXT|      |-------|    |-------|M_ACL0|      |M_WH_D|      |      |      |
  * `-----------------------------------------/      /      \      \-----------------------------------------'
- *             |     |      |      |      | /      /        \      \  |      |      |  FN  |      |
+ *             |     |      |      |      | /      /        \      \  |      |      |      |      |
  *             `----------------------------------'          '------------------------------------'
  */
   [_MISC] = LAYOUT( \
@@ -163,48 +161,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   XXXXXXX,   RESET, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                     KC_ACL2, XXXXXXX, KC_WH_U, XXXXXXX, XXXXXXX, XXXXXXX, \
   XXXXXXX, XXXXXXX, KC_VOLU, KC_MUTE, KC_VOLD, XXXXXXX,                     KC_ACL1,  KC_MB1,  KC_MB3,  KC_MB2, XXXXXXX, XXXXXXX, \
   XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,   XXXXXXX, KC_ACL0, XXXXXXX, KC_WH_D, XXXXXXX, XXXXXXX, XXXXXXX, \
-                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, KC_FN, XXXXXXX\
+                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX\
   ),
-/* Numbers
+/* Numbers / Fx keys
  * ,----------------------------------------.                     ,-----------------------------------------.
  * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |  /   |  4   |   5  |  6   |   +  |                    |   /  |  4   |  5   |   6  |   +  |      |
+ * |      |  /   |  4   |   5  |  6   |   +  |                    |      |  F1  |  F2  |  F3  |  F4  |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |  0   |  1   |   2  |  3   |   -  |-------.    ,-------|   0  |  1   |  2   |   3  |   -  |      |
+ * |      |  0   |  1   |   2  |  3   |   -  |-------.    ,-------|      |  F5  |  F6  |  F7  |  F8  |      |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
- * |      |  *   |  7   |   8  |  9   |      |-------|    |-------|      |  7   |  8   |   9  |   =  |      |
+ * |      |  *   |  7   |   8  |  9   |      |-------|    |-------|      |  F9  | F10  | F11  | F12  |      |
  * `-----------------------------------------/      /      \      \-----------------------------------------'
  *             |     |      |      |      | /      /        \      \  |      |      |      |      |
  *             `----------------------------------'          '------------------------------------'
  */
   [_NUMBERS] = LAYOUT( \
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-  XXXXXXX, KC_STRS,    KC_4,    KC_5,    KC_6, KC_PLUS,                     KC_STRS,    KC_4,    KC_5,    KC_6, KC_PLUS, XXXXXXX, \
-  XXXXXXX,    KC_0,    KC_1,    KC_2,    KC_3, KC_MINS,                        KC_0,    KC_1,    KC_2,    KC_3, KC_MINS, XXXXXXX, \
-  XXXXXXX, KC_ASTR,    KC_7,    KC_8,    KC_9, _______, XXXXXXX,   XXXXXXX, _______,    KC_7,    KC_8,    KC_9,  KC_EQL, XXXXXXX, \
+  XXXXXXX, KC_STRS,    KC_4,    KC_5,    KC_6, KC_PLUS,                     XXXXXXX,   KC_F1,   KC_F2,   KC_F3,   KC_F4, XXXXXXX, \
+  XXXXXXX,    KC_0,    KC_1,    KC_2,    KC_3, KC_MINS,                     XXXXXXX,   KC_F5,   KC_F6,   KC_F7,   KC_F8, XXXXXXX, \
+  XXXXXXX, KC_ASTR,    KC_7,    KC_8,    KC_9, _______, XXXXXXX,   XXXXXXX, XXXXXXX,   KC_F9,  KC_F10,  KC_F11,  KC_F12, XXXXXXX, \
                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX\
-  ),
-/*
- * FN
- * ,----------------------------------------.                     ,-----------------------------------------.
- * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
- * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |  F1  | F2   | F3   | F4   |      |                    |      |  F1  | F2   | F3   | F4   |      |
- * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |  F5  | F6   | F7   | F8   |      |-------.    ,-------|      |  F5  | F6   | F7   | F8   |      |
- * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
- * |      |  F9  | F10  | F11  | F12  |      |-------|    |-------|      |  F9  | F10  | F11  | F12  |      |
- * `-----------------------------------------/      /      \      \-----------------------------------------'
- *             |     |      |      |      | /      /        \      \  |      |      |      |      |
- *             `----------------------------------'          '------------------------------------'
- */
-  [_FN] = LAYOUT( \
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-  XXXXXXX,   KC_F1,   KC_F2,   KC_F3,   KC_F4, XXXXXXX,                     XXXXXXX,   KC_F1,   KC_F2,   KC_F3,   KC_F4, XXXXXXX, \
-  XXXXXXX,   KC_F5,   KC_F6,   KC_F7,   KC_F8, XXXXXXX,                     XXXXXXX,   KC_F5,   KC_F6,   KC_F7,   KC_F8, XXXXXXX, \
-  XXXXXXX,   KC_F9,  KC_F10,  KC_F11,  KC_F12, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX,   KC_F9,  KC_F10,  KC_F11,  KC_F12, XXXXXXX, \
-                    XXXXXXX, XXXXXXX, XXXXXXX, _______, _______,   _______, _______, XXXXXXX, XXXXXXX, XXXXXXX
   )
 };
 // clang-format on
@@ -236,9 +213,6 @@ void pointing_device_task() {
             break;
         case _NUMBERS:
             trackball_set_rgbw(255, 0, 0, 0);
-            break;
-        case _FN:
-            trackball_set_rgbw(153, 0, 110, 0);
             break;
         default:
             trackball_set_timed_rgbw(0, 0, 0, 80);
@@ -277,10 +251,7 @@ static void print_status_narrow(void) {
             oled_write_P(PSTR("Misc\n"), false);
             break;
         case _NUMBERS:
-            oled_write_P(PSTR("Num\n"), false);
-            break;
-        case _FN:
-            oled_write_P(PSTR("FN\n"), false);
+            oled_write_P(PSTR("NumFx\n"), false);
             break;
         default:
             oled_write_ln_P(PSTR("Undef"), false);
@@ -310,13 +281,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 layer_on(_RAISE);
             } else {
                 layer_off(_RAISE);
-            }
-            return false;
-        case KC_FN:
-            if (record->event.pressed) {
-                layer_on(_FN);
-            } else {
-                layer_off(_FN);
             }
             return false;
         case KC_AGRV:

@@ -13,10 +13,6 @@ for more options.
 /* encoder support */
 #define TAP_CODE_DELAY 100
 
-//#define NO_ACTION_TAPPING
-//#define NO_ACTION_ONESHOT
-
-// Pick good defaults for enabling homerow modifiers
 #undef TAPPING_TERM
 #define TAPPING_TERM 350
 #define PERMISSIVE_HOLD

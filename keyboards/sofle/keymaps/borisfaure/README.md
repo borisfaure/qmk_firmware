@@ -15,10 +15,10 @@ Adapted from foureight84' SofleKeyboard with Pimoroni Trackball
 * `=`, `-`, `+`, `_`, `{`, `}` are on the left home row of the main layers
 * Have Shift-Ins directly in the LOWER layer
 * PgUp/Dn on right of the keyboard on the LOWER and RAISE layers
-* Add FN layer for everything about media and mouse (along with F13-F14)
 * Enter on LOWER layer does mouse left click
+* Add MISC layer for everything about media and mouse (along with F13-F14)
 * Have A/; to act as Ctrl when held. Same for z// to act as Shift and w/o to
-act as GUI
+act as GUI, x/. as LeftAlt
 * LOWER acts as Tab if tapped, Raise acts as Backspace
-* Add Numbers layer on N/B
+* Add Numbers/Fn layer on N/B. Numbers on the left hand, Fx on the right hand
 * …
