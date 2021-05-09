@@ -18,7 +18,7 @@ for more options.
 
 // Pick good defaults for enabling homerow modifiers
 #undef TAPPING_TERM
-#define TAPPING_TERM 200
+#define TAPPING_TERM 350
 #define PERMISSIVE_HOLD
 #define IGNORE_MOD_TAP_INTERRUPT
 #define TAPPING_FORCE_HOLD
