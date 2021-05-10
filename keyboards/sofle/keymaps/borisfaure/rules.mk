@@ -4,6 +4,7 @@ ENCODER_ENABLE = yes
 EXTRAKEY_ENABLE = yes
 MOUSEKEY_ENABLE = no
 WPM_ENABLE = yes
+TAP_DANCE_ENABLE = yes
 
 #Debug options
 VERBOSE = no
