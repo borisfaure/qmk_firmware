@@ -154,21 +154,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,----------------------------------------.                     ,-----------------------------------------.
  * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |Reset |      |      |      |      |                    |M_ACL2|      |M_WH_U|      |      |      |
+ * |      |Reset |      |      |      |      |                    |      |      |M_WH_U|      |M_ACL2|      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      | VOL_U| MUTE | VOL_D|      |-------.    ,-------|M_ACL1|M_BTN1|M_BTN2|M_BTN3|      |      |
+ * |      |      | VOL_U| MUTE | VOL_D|      |-------.    ,-------|      |M_BTN1|M_BTN2|M_BTN3|M_ACL1|      |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
- * |      |      | M_PRV| PLAY | M_NXT|      |-------|    |-------|M_ACL0|      |M_WH_D|      |      |      |
+ * |      |      | M_PRV| PLAY | M_NXT|      |-------|    |-------|      |      |M_WH_D|      |M_ACL0|      |
  * `-----------------------------------------/      /      \      \-----------------------------------------'
  *             |     |      |      |      | /      /        \      \  |      |      |      |      |
  *             `----------------------------------'          '------------------------------------'
  */
   [_MISC] = LAYOUT( \
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-  XXXXXXX,   RESET, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                     KC_ACL2, XXXXXXX, KC_WH_U, XXXXXXX, XXXXXXX, XXXXXXX, \
-  XXXXXXX, XXXXXXX, KC_VOLU, KC_MUTE, KC_VOLD, XXXXXXX,                     KC_ACL1,  KC_MB1,  KC_MB3,  KC_MB2, XXXXXXX, XXXXXXX, \
-  XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,   XXXXXXX, KC_ACL0, XXXXXXX, KC_WH_D, XXXXXXX, XXXXXXX, XXXXXXX, \
-                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX\
+  XXXXXXX,   RESET, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                     XXXXXXX, XXXXXXX, KC_WH_U, XXXXXXX, KC_ACL2, XXXXXXX, \
+  XXXXXXX, XXXXXXX, KC_VOLU, KC_MUTE, KC_VOLD, XXXXXXX,                     XXXXXXX,  KC_MB1,  KC_MB3,  KC_MB2, KC_ACL1, XXXXXXX, \
+  XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, KC_WH_D, XXXXXXX, KC_ACL0, XXXXXXX, \
+                    _______, _______, _______, _______, _______,   _______, _______, _______, _______, _______\
   ),
 /* Numbers / Fx keys
  * ,----------------------------------------.                     ,-----------------------------------------.
