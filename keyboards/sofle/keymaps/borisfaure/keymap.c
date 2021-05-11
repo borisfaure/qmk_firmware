@@ -27,6 +27,8 @@ enum custom_keycodes {
     KC_ICIR,  // î
     KC_OCIR,  // ô
     KC_CCED,  // ç
+    KC_OE,    // œ
+    KC_EURO,  // €
 };
 
 uint8_t  MOUSE_BUTTONS;
@@ -138,17 +140,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |   ∨  |  à   |   _  |   +  |   &  |   |  |-------.    ,-------|   ←  |  ↓   |   ↑  |   →  |  "   | PgDn |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
- * |   ∨  |      |      |   ç  |   [  |   ]  |-------|    |-------| End  | Menu | Home | Pause|  "   |   ∨  |
+ * |   ∨  |  €   |  œ   |   ç  |   [  |   ]  |-------|    |-------| End  | Menu | Home | Pause|  "   |   ∨  |
  * `-----------------------------------------/      /      \      \-----------------------------------------'
- *             |     |      |      |  DEL | /Space /        \Enter \  |RAISE |      |      |      |
+ *             |     |      |      |  DEL | / RAlt /        \Enter \  |RAISE |      |      |      |
  *             `----------------------------------'          '------------------------------------'
  */
 [_RAISE] = LAYOUT( \
   KC_PAUSE, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                       KC_F6,   KC_F7,   KC_F8,   KC_F9,    KC_F10,  KC_DEL, \
   KC_GRV,   KC_EXLM, KC_HASH, KC_EACU, KC_ECIR, KC_EGRV,                     KC_DQUO, KC_UGRV, KC_ICIR, KC_OCIR,  KC_PSCR, KC_PGUP, \
   _______,  KC_AGRV, KC_UNDS, KC_PLUS, KC_AMPR, KC_PIPE,                     KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, KC_DQUO, KC_PGDN, \
-  _______,  XXXXXXX, XXXXXXX, KC_CCED, KC_LBRC, KC_RBRC, XXXXXXX,   XXXXXXX,  KC_END, KC_MENU, KC_HOME, KC_PAUS,  KC_DQUO, _______, \
-                      XXXXXXX, XXXXXXX, XXXXXXX, KC_DEL, KC_SPC,    KC_ENT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX\
+  _______,  KC_EURO,   KC_OE, KC_CCED, KC_LBRC, KC_RBRC, XXXXXXX,   XXXXXXX,  KC_END, KC_MENU, KC_HOME, KC_PAUS,  KC_DQUO, _______, \
+                     XXXXXXX, XXXXXXX, XXXXXXX, KC_DEL,  KC_RALT,   KC_ENT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX\
 ),
 /* MISC (Media/Mouse)
  * ,----------------------------------------.                     ,-----------------------------------------.
@@ -378,6 +380,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 } else {
                     SEND_STRING(SS_TAP(X_RALT) ",c");
                 }
+            }
+            return false;
+        case KC_OE:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_BIT(KC_LSFT)) {
+                    SEND_STRING(SS_UP(X_LSFT)
+                                    SS_TAP(X_RALT) "OE" SS_DOWN(X_LSFT));
+                } else if (get_mods() & MOD_BIT(KC_RSFT)) {
+                    SEND_STRING(SS_UP(X_RSFT)
+                                    SS_TAP(X_RALT) "OE" SS_DOWN(X_RSFT));
+                } else {
+                    SEND_STRING(SS_TAP(X_RALT) "oe");
+                }
+            }
+            return false;
+        case KC_EURO:
+            if (record->event.pressed) {
+                SEND_STRING(SS_TAP(X_RALT) "=E");
             }
             return false;
         case KC_MB1:
