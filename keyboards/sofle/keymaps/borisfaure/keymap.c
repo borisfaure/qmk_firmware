@@ -174,21 +174,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,----------------------------------------.                     ,-----------------------------------------.
  * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |  /   |  4   |   5  |  6   |   +  |                    |      |  F1  |  F2  |  F3  |  F4  |      |
+ * |      |  .   |  4   |   5  |  6   |   +  |                    |  /   |  F1  |  F2  |  F3  |  F4  |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |  0   |  1   |   2  |  3   |   -  |-------.    ,-------|      |  F5  |  F6  |  F7  |  F8  |      |
+ * |      |  0   |  1   |   2  |  3   |   -  |-------.    ,-------|  *   |  F5  |  F6  |  F7  |  F8  |      |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
- * |      |  *   |  7   |   8  |  9   |      |-------|    |-------|      |  F9  | F10  | F11  | F12  |      |
+ * |      |  ,   |  7   |   8  |  9   |      |-------|    |-------|      |  F9  | F10  | F11  | F12  |      |
  * `-----------------------------------------/      /      \      \-----------------------------------------'
  *             |     |      |      |      | /      /        \      \  |      |      |      |      |
  *             `----------------------------------'          '------------------------------------'
  */
   [_NUMBERS] = LAYOUT( \
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-  XXXXXXX, KC_STRS,    KC_4,    KC_5,    KC_6, KC_PLUS,                     XXXXXXX,   KC_F1,   KC_F2,   KC_F3,   KC_F4, XXXXXXX, \
-  XXXXXXX,    KC_0,    KC_1,    KC_2,    KC_3, KC_MINS,                     XXXXXXX,   KC_F5,   KC_F6,   KC_F7,   KC_F8, XXXXXXX, \
-  XXXXXXX, KC_ASTR,    KC_7,    KC_8,    KC_9, _______, XXXXXXX,   XXXXXXX, XXXXXXX,   KC_F9,  KC_F10,  KC_F11,  KC_F12, XXXXXXX, \
-                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX\
+  XXXXXXX,  KC_DOT,    KC_4,    KC_5,    KC_6, KC_PLUS,                     KC_STRS,   KC_F1,   KC_F2,   KC_F3,   KC_F4, XXXXXXX, \
+  XXXXXXX,    KC_0,    KC_1,    KC_2,    KC_3, KC_MINS,                     KC_ASTR,   KC_F5,   KC_F6,   KC_F7,   KC_F8, XXXXXXX, \
+  XXXXXXX, KC_COMM,    KC_7,    KC_8,    KC_9, KC_EQL,  XXXXXXX,   XXXXXXX,  KC_EQL,   KC_F9,  KC_F10,  KC_F11,  KC_F12, XXXXXXX, \
+                    _______, _______, _______, _______, _______,   _______, _______, _______, _______, _______\
   )
 };
 // clang-format on
