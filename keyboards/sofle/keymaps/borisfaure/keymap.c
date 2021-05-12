@@ -105,11 +105,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #define MISC_T LT(_MISC, KC_T)
 
 [_QWERTY] = LAYOUT( \
-  KC_ESC,   KC_1,    KC_2,    KC_3,  KC_4,  KC_5,                           KC_6,  KC_7, KC_8,    KC_9,    KC_0,    KC_BSPC, \
-  KC_TAB,   QQ_ESC,  KC_GUIW, KC_E,  KC_R,  MISC_T,                       MISC_Y,  KC_U, KC_I,    KC_GUIO, KC_P,    KC_BSLS, \
-  KC_LCTRL, KC_CTLA, KC_S,    KC_D,  KC_F,  KC_G,                           KC_H,  KC_J, KC_K,    KC_L,    KC_CTRS, KC_CTRQ, \
-  KC_LSFT,  KC_LSHZ, ALT_X,   KC_C,  KC_V,  NUM_B, KC_MUTE,       XXXXXXX, NUM_N,  KC_M, KC_COMM, ALT_DOT, KC_STRS, KC_RSFT, \
-                 KC_LBRC ,KC_LGUI, KC_LALT, KC_LWR, KC_SPC,      KC_ENT, KC_RSE, KC_RALT, MO(_MISC), KC_RBRC \
+  KC_ESC,   KC_1,    KC_2,    KC_3,  KC_4,   KC_5,                           KC_6,  KC_7, KC_8,    KC_9,    KC_0,    KC_BSPC, \
+  KC_TAB,   QQ_ESC,  KC_GUIW, KC_E,  KC_R,   MISC_T,                       MISC_Y,  KC_U, KC_I,    KC_GUIO, KC_P,    KC_BSLS, \
+  KC_LCTRL, KC_CTLA, KC_S,    KC_D,  KC_F,   KC_G,                           KC_H,  KC_J, KC_K,    KC_L,    KC_CTRS, KC_CTRQ, \
+  KC_LSFT,  KC_LSHZ, ALT_X,   KC_C,  KC_V,   NUM_B, KC_MUTE,       XXXXXXX, NUM_N,  KC_M, KC_COMM, ALT_DOT, KC_STRS, KC_RSFT, \
+                 KC_LBRC ,KC_LGUI, KC_LALT,  KC_LWR, KC_SPC,      KC_ENT, KC_RSE, KC_RALT, MO(_MISC), KC_RBRC \
 ),
 /* LOWER / Symbols
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -121,16 +121,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
  * |   ∨  |  @   |   &  |   %  |   [  |   ]  |-------|    |-------|  End | Menu | Home |   '  |  "   |   ∨  |
  * `-----------------------------------------/      /      \      \-----------------------------------------'
- *             |     |      |      |      | / RAlt /        \ MB1  \  |MISC_DEL|     |     |      |
+ *             |     |      |      |      | / RAlt /        \ ESC  \  |MISC_DEL|     |     |      |
  *             `----------------------------------'          '------------------------------------'
  */
-#define MISCDEL LT(_MISC, KC_DEL)
 [_LOWER] = LAYOUT( \
   KC_TILD,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                       KC_F6,   KC_F7,   KC_F8,     KC_F9,    KC_F10,  KC_DEL, \
   KC_GRV,   KC_EXLM, KC_HASH, KC_DLR,  KC_LPRN, KC_RPRN,                     KC_CIRC, KC_AMPR, S(KC_INS), KC_ASTR,  KC_TILD, KC_PGUP, \
   _______,  KC_EQL,  KC_MINS, KC_GRV,  KC_LCBR, KC_RCBR,                     KC_LEFT, KC_PGDN, KC_PGUP,   KC_RIGHT, KC_BSLS, KC_PGDN, \
   _______,  KC_AT,   KC_AMPR, KC_PERC, KC_LBRC, KC_RBRC, XXXXXXX,   XXXXXXX, KC_END,  KC_MENU, KC_HOME,   KC_QUOT,  KC_DQUO, _______, \
-                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_RALT,  KC_MB1, MISCDEL, XXXXXXX, XXXXXXX, XXXXXXX\
+                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_RALT,  KC_ESC, KC_DEL, XXXXXXX, XXXXXXX, XXXXXXX\
 ),
 /* RAISE / French
  * ,----------------------------------------.                     ,-----------------------------------------.
@@ -138,7 +137,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |   ~  |  !   |  #   |   é  |   ê  |   è  |                    |  "   |  ù   |  î   |  ô   |PrtScr| PgUp |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |   ∨  |  à   |   _  |   +  |   &  |   |  |-------.    ,-------|   ←  |  ↓   |   ↑  |   →  | Esc  | PgDn |
+ * |   ∨  |  à   |   _  |   +  |   &  |   |  |-------.    ,-------|   ←  |  ↓   |   ↑  |   →  | ESC  | PgDn |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * |   ∨  |  €   |  œ   |   ç  |   [  |   ]  |-------|    |-------| End  | Menu | Home | Pause|  "   |   ∨  |
  * `-----------------------------------------/      /      \      \-----------------------------------------'
@@ -162,7 +161,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * |      |      | M_PRV| PLAY | M_NXT|      |-------|    |-------|      |      |M_WH_D|      |M_ACL0|      |
  * `-----------------------------------------/      /      \      \-----------------------------------------'
- *             |     |      |      |      | /      /        \      \  |      |      |      |      |
+ *             |     |      |      | TAB  | / SPC  /        \ MB1  \  | BS   |      |      |      |
  *             `----------------------------------'          '------------------------------------'
  */
   [_MISC] = LAYOUT( \
@@ -170,7 +169,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   XXXXXXX,   RESET, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                     XXXXXXX, XXXXXXX, KC_WH_U, XXXXXXX, KC_ACL2, XXXXXXX, \
   XXXXXXX, XXXXXXX, KC_VOLU, KC_MUTE, KC_VOLD, XXXXXXX,                     XXXXXXX,  KC_MB1,  KC_MB3,  KC_MB2, KC_ACL1, XXXXXXX, \
   XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, KC_WH_D, XXXXXXX, KC_ACL0, XXXXXXX, \
-                    _______, _______, _______, _______, _______,   _______, _______, _______, _______, _______\
+                    _______, _______, _______, KC_TAB,  KC_SPC,    KC_MB1,  KC_BSPC, _______, _______, _______\
   ),
 /* Numbers / Fx keys
  * ,----------------------------------------.                     ,-----------------------------------------.
@@ -278,6 +277,13 @@ void oled_task_user(void) { print_status_narrow(); }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
+        case KC_SPC:
+            if (record->event.pressed && get_mods()) {
+                clear_mods();
+                register_code(KC_TAB);
+                return false;
+            }
+            return true;
         case KC_AGRV:
             if (record->event.pressed) {
                 if (get_mods() & MOD_BIT(KC_LSFT)) {
