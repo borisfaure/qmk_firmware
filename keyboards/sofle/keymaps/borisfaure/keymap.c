@@ -13,6 +13,7 @@ enum sofle_layers {
     _RAISE,
     _MISC,
     _NUMBERS,
+    _TMUX,
 };
 
 enum custom_keycodes {
@@ -29,6 +30,26 @@ enum custom_keycodes {
     KC_CCED,  // ç
     KC_OE,    // œ
     KC_EURO,  // €
+    T_NEW,    // tmux new
+    T_PREV,   // tmux prev-window
+    T_NEXT,   // tmux next-window
+    T_LAST,   // tmux last-window
+    T_CMD,    // tmux command
+    T_COPY,   // tmux copy-mode
+    T_PASTE,  // tmux paste-buffer
+    T_SCROL,  // tmux scroll
+    T_MOVE,   // tmux move-window
+    T_RENAM,  // tmux rename-window
+    T_1,      // tmux select-window -t 1
+    T_2,      // tmux select-window -t 2
+    T_3,      // tmux select-window -t 3
+    T_4,      // tmux select-window -t 4
+    T_5,      // tmux select-window -t 5
+    T_6,      // tmux select-window -t 6
+    T_7,      // tmux select-window -t 7
+    T_8,      // tmux select-window -t 8
+    T_9,      // tmux select-window -t 9
+    T_0,      // tmux select-window -t 0
 };
 
 uint8_t  MOUSE_BUTTONS;
@@ -92,11 +113,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #define KC_LWR LT(_LOWER, KC_TAB)
 #define NUM_B LT(_NUMBERS, KC_B)
 #define MISC_T LT(_MISC, KC_T)
+#define TMUX_F LT(_TMUX, KC_F)
 
 [_QWERTY] = LAYOUT( \
   KC_ESC,   KC_1,    KC_2,    KC_3,  KC_4,   KC_5,                           KC_6,  KC_7, KC_8,    KC_9,    KC_0,    KC_BSPC, \
   KC_TAB,   KC_CTLQ, KC_GUIW, KC_E,  KC_R,   MISC_T,                       MISC_Y,  KC_U, KC_I,    KC_GUIO, KC_CTRP, KC_BSLS, \
-  KC_LCTRL, KC_A,    KC_S,    KC_D,  KC_F,   KC_G,                           KC_H,  KC_J, KC_K,    KC_L,    KC_SCLN, KC_CTRQ, \
+  KC_LCTRL, KC_A,    KC_S,    KC_D,  TMUX_F, KC_G,                           KC_H,  KC_J, KC_K,    KC_L,    KC_SCLN, KC_CTRQ, \
   KC_LSFT,  KC_LSHZ, ALT_X,   KC_C,  KC_V,   NUM_B, KC_MUTE,       XXXXXXX, NUM_N,  KC_M, KC_COMM, ALT_DOT, KC_STRS, KC_RSFT, \
                  KC_LBRC ,KC_LGUI, KC_LALT,  KC_LWR, KC_SPC,      KC_ENT, KC_RSE, KC_RALT, MO(_MISC), KC_RBRC \
 ),
@@ -110,7 +132,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
  * |   ∨  |  @   |   &  |   %  |   [  |   ]  |-------|    |-------|  End | Menu | Home |   '  |  "   |   ∨  |
  * `-----------------------------------------/      /      \      \-----------------------------------------'
- *             |     |      |      |      | / RAlt /        \ ESC  \  |MISC_DEL|     |     |      |
+ *             |     |      |      |      | / RAlt /        \Enter \  |MISC_DEL|     |     |      |
  *             `----------------------------------'          '------------------------------------'
  */
 [_LOWER] = LAYOUT( \
@@ -118,26 +140,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_GRV,   KC_EXLM, KC_HASH, KC_DLR,  KC_LPRN, KC_RPRN,                     KC_CIRC, KC_AMPR, S(KC_INS), KC_ASTR,  KC_TILD, KC_PGUP, \
   _______,  KC_EQL,  KC_MINS, KC_GRV,  KC_LCBR, KC_RCBR,                     KC_LEFT, KC_PGDN, KC_PGUP,   KC_RIGHT, KC_BSLS, KC_PGDN, \
   _______,  KC_AT,   KC_AMPR, KC_PERC, KC_LBRC, KC_RBRC, XXXXXXX,   XXXXXXX, KC_END,  KC_MENU, KC_HOME,   KC_QUOT,  KC_DQUO, _______, \
-                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_RALT,  KC_ESC, KC_DEL, XXXXXXX, XXXXXXX, XXXXXXX\
+                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_RALT,  KC_ENT, KC_DEL, XXXXXXX, XXXXXXX, XXXXXXX\
 ),
 /* RAISE / French
  * ,----------------------------------------.                     ,-----------------------------------------.
  * | Pause|  F1  |  F2  |  F3  |  F4  |  F5  |                    |  F6  |  F7  |  F8  |  F9  | F10  | Del  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |   ~  |  !   |  #   |   é  |   ê  |   è  |                    |  "   |  ù   |  î   |  ô   |PrtScr| PgUp |
+ * |   ~  |  ESC |  #   |   é  |   ê  |   è  |                    |  "   |  ù   |  î   |  ô   |PrtScr| PgUp |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |   ∨  |  à   |   _  |   +  |   &  |   |  |-------.    ,-------|   ←  |  ↓   |   ↑  |   →  | ESC  | PgDn |
+ * |   ∨  |  à   |   _  |   +  |   &  |   |  |-------.    ,-------|   ←  |  ↓   |   ↑  |   →  | PgUp | PgDn |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
- * |   ∨  |  €   |  œ   |   ç  |   [  |   ]  |-------|    |-------| End  | Menu | Home | Pause|  "   |   ∨  |
+ * |   ∨  |  €   |  œ   |   ç  |   [  |   ]  |-------|    |-------| End  | Menu | Home | Pause| PgDn |   ∨  |
  * `-----------------------------------------/      /      \      \-----------------------------------------'
  *             |     |      |      |  DEL | / RAlt /        \Enter \  |RAISE |      |      |      |
  *             `----------------------------------'          '------------------------------------'
  */
 [_RAISE] = LAYOUT( \
   KC_PAUSE, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                       KC_F6,   KC_F7,   KC_F8,   KC_F9,    KC_F10,  KC_DEL, \
-  KC_GRV,   KC_EXLM, KC_HASH, KC_EACU, KC_ECIR, KC_EGRV,                     KC_DQUO, KC_UGRV, KC_ICIR, KC_OCIR,  KC_PSCR, KC_PGUP, \
-  _______,  KC_AGRV, KC_UNDS, KC_PLUS, KC_AMPR, KC_PIPE,                     KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, KC_ESC,  KC_PGDN, \
-  _______,  KC_EURO,   KC_OE, KC_CCED, KC_LBRC, KC_RBRC, XXXXXXX,   XXXXXXX,  KC_END, KC_MENU, KC_HOME, KC_PAUS,  KC_DQUO, _______, \
+  KC_GRV,   KC_ESC,  KC_HASH, KC_EACU, KC_ECIR, KC_EGRV,                     KC_DQUO, KC_UGRV, KC_ICIR, KC_OCIR,  KC_PSCR, KC_PGUP, \
+  _______,  KC_AGRV, KC_UNDS, KC_PLUS, KC_AMPR, KC_PIPE,                     KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, KC_PGUP, KC_PGDN, \
+  _______,  KC_EURO,   KC_OE, KC_CCED, KC_LBRC, KC_RBRC, XXXXXXX,   XXXXXXX,  KC_END, KC_MENU, KC_HOME, KC_PAUS,  KC_PGDN, _______, \
                      XXXXXXX, XXXXXXX, XXXXXXX, KC_DEL,  KC_RALT,   KC_ENT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX\
 ),
 /* MISC (Media/Mouse)
@@ -155,7 +177,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
   [_MISC] = LAYOUT( \
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-  XXXXXXX,   RESET, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                     XXXXXXX, XXXXXXX, KC_WH_U, XXXXXXX, KC_ACL2, XXXXXXX, \
+  XXXXXXX, KC_PAUS, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                     XXXXXXX, XXXXXXX, KC_WH_U, XXXXXXX, KC_ACL2, XXXXXXX, \
   XXXXXXX, XXXXXXX, KC_VOLU, KC_MUTE, KC_VOLD, XXXXXXX,                     XXXXXXX,  KC_MB1,  KC_MB3,  KC_MB2, KC_ACL1, XXXXXXX, \
   XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, KC_WH_D, XXXXXXX, KC_ACL0, XXXXXXX, \
                     _______, _______, _______, KC_TAB,  KC_SPC,    KC_MB1,  KC_BSPC, _______, _______, _______\
@@ -179,6 +201,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   XXXXXXX,    KC_0,    KC_1,    KC_2,    KC_3, KC_MINS,                     KC_ASTR,   KC_F5,   KC_F6,   KC_F7,   KC_F8, XXXXXXX, \
   XXXXXXX, KC_COMM,    KC_7,    KC_8,    KC_9, KC_EQL,  XXXXXXX,   XXXXXXX,  KC_EQL,   KC_F9,  KC_F10,  KC_F11,  KC_F12, XXXXXXX, \
                     _______, _______, _______, _______, _______,   _______, _______, _______, _______, _______\
+  ),
+/*
+ * TMUX
+ * ,----------------------------------------.                     ,-----------------------------------------.
+ * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * |      |  6   |  7   |  8   |  9   |  0   |                    |  1   |  2   |  3   |  4   |  5   |      |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * |      | Last |      |      |      |      |-------.    ,-------| Prev |      |Scroll| Next | Cmd  |      |
+ * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
+ * |      |      |      | New  | Copy |Paste |-------|    |-------|      |      |Rename| Move | Paste|      |
+ * `-----------------------------------------/      /      \      \-----------------------------------------'
+ *             |     |      |      |      | /      /        \      \  |      |      |      |      |
+ *             `----------------------------------'          '------------------------------------'
+ */
+  [_TMUX] = LAYOUT( \
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+  XXXXXXX,     T_6,     T_7,     T_8,     T_9,     T_0,                         T_1,     T_2,     T_3,     T_4,     T_5, XXXXXXX, \
+  XXXXXXX,  T_LAST, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      T_PREV, XXXXXXX, T_SCROL,  T_NEXT,   T_CMD, XXXXXXX, \
+  XXXXXXX, XXXXXXX, XXXXXXX,   T_NEW, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, T_RENAM,  T_MOVE, T_PASTE, XXXXXXX, \
+                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
   )
 };
 // clang-format on
@@ -250,6 +293,9 @@ static void print_status_narrow(void) {
         case _NUMBERS:
             oled_write_P(PSTR("NumFx\n"), false);
             break;
+        case _TMUX:
+            oled_write_P(PSTR("Tmux\n"), false);
+            break;
         default:
             oled_write_ln_P(PSTR("Undef"), false);
     }
@@ -264,10 +310,82 @@ void oled_task_user(void) { print_status_narrow(); }
 
 #endif
 
+#define TMUX_PREFIX SS_DOWN(X_LCTL) "a" SS_UP(X_LCTL)
+/// Handle events when on the TMUX layer
+static bool process_record_tmux(uint16_t keycode, keyrecord_t *record) {
+    if (!record->event.pressed) return true;
+    switch (keycode) {
+        case T_NEW:
+            SEND_STRING(TMUX_PREFIX "c");
+            return false;
+        case T_PREV:
+            SEND_STRING(TMUX_PREFIX "p");
+            return false;
+        case T_NEXT:
+            SEND_STRING(TMUX_PREFIX "n");
+            return false;
+        case T_LAST:
+            SEND_STRING(TMUX_PREFIX "l");
+            return false;
+        case T_CMD:
+            SEND_STRING(TMUX_PREFIX ":");
+            return false;
+        case T_COPY:
+            SEND_STRING(TMUX_PREFIX "[");
+            return false;
+        case T_PASTE:
+            SEND_STRING(TMUX_PREFIX "]");
+            return false;
+        case T_SCROL:
+            SEND_STRING(TMUX_PREFIX SS_TAP(X_PGUP));
+            return false;
+        case T_MOVE:
+            SEND_STRING(TMUX_PREFIX ".");
+            return false;
+        case T_RENAM:
+            SEND_STRING(TMUX_PREFIX ",");
+            return false;
+        case T_1:
+            SEND_STRING(TMUX_PREFIX "1");
+            return false;
+        case T_2:
+            SEND_STRING(TMUX_PREFIX "2");
+            return false;
+        case T_3:
+            SEND_STRING(TMUX_PREFIX "3");
+            return false;
+        case T_4:
+            SEND_STRING(TMUX_PREFIX "4");
+            return false;
+        case T_5:
+            SEND_STRING(TMUX_PREFIX "5");
+            return false;
+        case T_6:
+            SEND_STRING(TMUX_PREFIX "6");
+            return false;
+        case T_7:
+            SEND_STRING(TMUX_PREFIX "7");
+            return false;
+        case T_8:
+            SEND_STRING(TMUX_PREFIX "8");
+            return false;
+        case T_9:
+            SEND_STRING(TMUX_PREFIX "9");
+            return false;
+        case T_0:
+            SEND_STRING(TMUX_PREFIX "0");
+            return false;
+    }
+    return true;
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (get_highest_layer(layer_state) == _TMUX) {
+        return process_record_tmux(keycode, record);
+    }
     switch (keycode) {
         case KC_SPC:
-            if (record->event.pressed && get_mods()) {
+            if (record->event.pressed && get_mods() & MOD_MASK_SHIFT) {
                 clear_mods();
                 register_code(KC_TAB);
                 return false;
