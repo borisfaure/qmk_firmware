@@ -17,8 +17,8 @@ Adapted from foureight84' SofleKeyboard with Pimoroni Trackball
 * PgUp/Dn on right of the keyboard on the LOWER and RAISE layers
 * Enter on LOWER layer does mouse left click
 * Add MISC layer for everything about media and mouse
-* Have A/; to act as Ctrl when held. Same for z// to act as Shift and w/o to
-act as GUI, x/. as LeftAlt
+* Have Q/P to act as Ctrl when held. Same for Z// to act as Shift and W/O to
+act as GUI, X/. as LeftAlt
 * LOWER acts as Tab if tapped, Raise acts as Backspace
 * Add Numbers/Fn layer on N/B. Numbers on the left hand, Fx on the right hand
 * …

@@ -75,7 +75,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* right hand */
 #define KC_CTRQ RCTL_T(KC_QUOT)
-#define KC_CTRS RCTL_T(KC_SCLN)
+#define KC_CTRP RCTL_T(KC_P)
 #define KC_STRS RSFT_T(KC_SLSH)
 #define KC_GUIO RGUI_T(KC_O)
 #define ALT_DOT LALT_T(KC_DOT)
@@ -85,7 +85,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* left hand */
 #define QQ_ESC  TD(TD_QQ_ESC)
-#define KC_CTLA LCTL_T(KC_A)
+#define KC_CTLQ LCTL_T(KC_Q)
 #define KC_LSHZ LSFT_T(KC_Z)
 #define KC_GUIW LGUI_T(KC_W)
 #define ALT_X LALT_T(KC_X)
@@ -95,8 +95,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_QWERTY] = LAYOUT( \
   KC_ESC,   KC_1,    KC_2,    KC_3,  KC_4,   KC_5,                           KC_6,  KC_7, KC_8,    KC_9,    KC_0,    KC_BSPC, \
-  KC_TAB,   KC_Q,    KC_GUIW, KC_E,  KC_R,   MISC_T,                       MISC_Y,  KC_U, KC_I,    KC_GUIO, KC_P,    KC_BSLS, \
-  KC_LCTRL, KC_CTLA, KC_S,    KC_D,  KC_F,   KC_G,                           KC_H,  KC_J, KC_K,    KC_L,    KC_CTRS, KC_CTRQ, \
+  KC_TAB,   KC_CTLQ, KC_GUIW, KC_E,  KC_R,   MISC_T,                       MISC_Y,  KC_U, KC_I,    KC_GUIO, KC_CTRP, KC_BSLS, \
+  KC_LCTRL, KC_A,    KC_S,    KC_D,  KC_F,   KC_G,                           KC_H,  KC_J, KC_K,    KC_L,    KC_SCLN, KC_CTRQ, \
   KC_LSFT,  KC_LSHZ, ALT_X,   KC_C,  KC_V,   NUM_B, KC_MUTE,       XXXXXXX, NUM_N,  KC_M, KC_COMM, ALT_DOT, KC_STRS, KC_RSFT, \
                  KC_LBRC ,KC_LGUI, KC_LALT,  KC_LWR, KC_SPC,      KC_ENT, KC_RSE, KC_RALT, MO(_MISC), KC_RBRC \
 ),
