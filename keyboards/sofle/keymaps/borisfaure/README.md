@@ -21,5 +21,4 @@ Adapted from foureight84' SofleKeyboard with Pimoroni Trackball
 act as GUI, x/. as LeftAlt
 * LOWER acts as Tab if tapped, Raise acts as Backspace
 * Add Numbers/Fn layer on N/B. Numbers on the left hand, Fx on the right hand
-* Tap dance on qq produces Esc
 * …

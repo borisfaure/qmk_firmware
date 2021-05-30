@@ -32,18 +32,7 @@ enum custom_keycodes {
 };
 
 uint8_t  MOUSE_BUTTONS;
-uint16_t trackball_led_timer;
-
-// Tap Dance declarations
-enum {
-    TD_QQ_ESC,
-};
-
-// Tap Dance definitions
-qk_tap_dance_action_t tap_dance_actions[] = {
-    // Tap once for q, twice for ESC
-    [TD_QQ_ESC] = ACTION_TAP_DANCE_DOUBLE(KC_Q, KC_ESC),
-};
+uint16_t trackball_led_time;
 
 // clang-format off
 /*
@@ -106,7 +95,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_QWERTY] = LAYOUT( \
   KC_ESC,   KC_1,    KC_2,    KC_3,  KC_4,   KC_5,                           KC_6,  KC_7, KC_8,    KC_9,    KC_0,    KC_BSPC, \
-  KC_TAB,   QQ_ESC,  KC_GUIW, KC_E,  KC_R,   MISC_T,                       MISC_Y,  KC_U, KC_I,    KC_GUIO, KC_P,    KC_BSLS, \
+  KC_TAB,   KC_Q,    KC_GUIW, KC_E,  KC_R,   MISC_T,                       MISC_Y,  KC_U, KC_I,    KC_GUIO, KC_P,    KC_BSLS, \
   KC_LCTRL, KC_CTLA, KC_S,    KC_D,  KC_F,   KC_G,                           KC_H,  KC_J, KC_K,    KC_L,    KC_CTRS, KC_CTRQ, \
   KC_LSFT,  KC_LSHZ, ALT_X,   KC_C,  KC_V,   NUM_B, KC_MUTE,       XXXXXXX, NUM_N,  KC_M, KC_COMM, ALT_DOT, KC_STRS, KC_RSFT, \
                  KC_LBRC ,KC_LGUI, KC_LALT,  KC_LWR, KC_SPC,      KC_ENT, KC_RSE, KC_RALT, MO(_MISC), KC_RBRC \
