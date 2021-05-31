@@ -90,7 +90,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |LCtrl |   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   ;  |  '   |
  * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
- * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |RShift|
+ * |LShift| Esc  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |RShift|
  * `-----------------------------------------/      /      \      \-----------------------------------------'
  *             |  [  | LGUI | LAlt |LOWER | /Space /        \Enter \  |RAISE | RAlt | MISC |   ]  |
  *             `----------------------------------'          '------------------------------------'
@@ -107,9 +107,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #define MISC_Y LT(_MISC, KC_Y)
 
 /* left hand */
-#define QQ_ESC  TD(TD_QQ_ESC)
 #define KC_CTLQ LCTL_T(KC_Q)
-#define KC_LSHZ LSFT_T(KC_Z)
+#define LSH_ESC LSFT_T(KC_ESC)
 #define KC_GUIW LGUI_T(KC_W)
 #define ALT_X LALT_T(KC_X)
 #define KC_LWR LT(_LOWER, KC_TAB)
@@ -121,7 +120,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_ESC,   KC_1,    KC_2,    KC_3,  KC_4,   KC_5,                           KC_6,  KC_7, KC_8,    KC_9,    KC_0,    KC_BSPC, \
   KC_TAB,   KC_CTLQ, KC_GUIW, KC_E,  KC_R,   MISC_T,                       MISC_Y,  KC_U, KC_I,    KC_GUIO, KC_CTRP, KC_BSLS, \
   KC_LCTRL, KC_A,    KC_S,    KC_D,  TMUX_F, KC_G,                           KC_H,  KC_J, KC_K,    KC_L,    KC_SCLN, KC_CTRQ, \
-  KC_LSFT,  KC_LSHZ, ALT_X,   KC_C,  KC_V,   NUM_B, KC_MUTE,       XXXXXXX, NUM_N,  KC_M, KC_COMM, ALT_DOT, KC_STRS, KC_RSFT, \
+  KC_LSFT,  LSH_ESC, ALT_X,   KC_C,  KC_V,   NUM_B, KC_MUTE,       XXXXXXX, NUM_N,  KC_M, KC_COMM, ALT_DOT, KC_STRS, KC_RSFT, \
                  KC_LBRC ,KC_LGUI, KC_LALT,  KC_LWR, KC_SPC,      KC_ENT, KC_RSE, KC_RALT, MO(_MISC), KC_RBRC \
 ),
 /* LOWER / Symbols
@@ -148,7 +147,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,----------------------------------------.                     ,-----------------------------------------.
  * | Pause|  F1  |  F2  |  F3  |  F4  |  F5  |                    |  F6  |  F7  |  F8  |  F9  | F10  | Del  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |   ~  |  ESC |  #   |   é  |   ê  |   è  |                    |  "   |  ù   |  î   |  ô   |PrtScr| PgUp |
+ * |   ~  |  ESC |  #   |   é  |   ê  |   è  |                    |  Z   |  ù   |  î   |  ô   |PrtScr| PgUp |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |   ∨  |  à   |   _  |   +  |   &  |   |  |-------.    ,-------|   ←  |  ↓   |   ↑  |   →  | PgUp | PgDn |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
@@ -158,8 +157,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *             `----------------------------------'          '------------------------------------'
  */
 [_RAISE] = LAYOUT( \
-  KC_PAUSE, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                       KC_F6,   KC_F7,   KC_F8,   KC_F9,    KC_F10,  KC_DEL, \
-  KC_GRV,   KC_ESC,  KC_HASH, KC_EACU, KC_ECIR, KC_EGRV,                     KC_DQUO, KC_UGRV, KC_ICIR, KC_OCIR,  KC_PSCR, KC_PGUP, \
+  KC_PAUSE, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                         KC_F6, KC_F7,   KC_F8,   KC_F9,    KC_F10,  KC_DEL, \
+  KC_GRV,   KC_ESC,  KC_HASH, KC_EACU, KC_ECIR, KC_EGRV,                        KC_Z, KC_UGRV, KC_ICIR, KC_OCIR,  KC_PSCR, KC_PGUP, \
   _______,  KC_AGRV, KC_UNDS, KC_PLUS, KC_AMPR, KC_PIPE,                     KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, KC_PGUP, KC_PGDN, \
   _______,  KC_EURO,   KC_OE, KC_CCED, KC_LBRC, KC_RBRC, XXXXXXX,   XXXXXXX,  KC_END, KC_MENU, KC_HOME, KC_PAUS,  KC_PGDN, _______, \
                      XXXXXXX, XXXXXXX, XXXXXXX, KC_DEL,  KC_RALT,   KC_ENT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX\

@@ -23,4 +23,5 @@ act as GUI, X/. as LeftAlt
 * Add Numbers/Fn layer on N/B. Numbers on the left hand, Fx on the right hand
 * Add a layer to help working with TMUX
 * Add a GAMING mode where most keys can be kept held down
+* Move the z key to the RAISE layer and have Esc in its place
 * …
