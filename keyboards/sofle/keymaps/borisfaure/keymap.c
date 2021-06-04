@@ -160,7 +160,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_PAUSE, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                         KC_F6, KC_F7,   KC_F8,   KC_F9,    KC_F10,  KC_DEL, \
   KC_GRV,   KC_ESC,  KC_HASH, KC_EACU, KC_ECIR, KC_EGRV,                        KC_Z, KC_UGRV, KC_ICIR, KC_OCIR,  KC_PSCR, KC_PGUP, \
   _______,  KC_AGRV, KC_UNDS, KC_PLUS, KC_AMPR, KC_PIPE,                     KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, KC_PGUP, KC_PGDN, \
-  _______,  KC_EURO,   KC_OE, KC_CCED, KC_LBRC, KC_RBRC, XXXXXXX,   XXXXXXX,  KC_END, KC_MENU, KC_HOME, KC_PAUS,  KC_PGDN, _______, \
+  _______,  KC_EURO,   KC_OE, KC_CCED, KC_LBRC, KC_RBRC, XXXXXXX,   XXXXXXX,  KC_END, KC_MENU, KC_HOME, _______,  KC_PGDN, _______, \
                      XXXXXXX, XXXXXXX, XXXXXXX, KC_DEL,  KC_RALT,   KC_ENT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX\
 ),
 /* MISC (Media/Mouse)
