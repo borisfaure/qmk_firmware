@@ -107,6 +107,8 @@ POSSIBILITY OF SUCH DAMAGE.
 #define _PG_DN_ KC_PGDN
 #define _PG_UP_ KC_PGUP
 
+#define __ESC__ KC_ESC
+#define __TAB__ KC_TAB
 #define __END__ KC_END
 #define _MENU__ KC_MENU
 #define _HOME__ KC_HOME
@@ -148,7 +150,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define _T_MISC LT(_MISC, KC_T)
 #define _F_TMUX LT(_TMUX, KC_F)
 
-#define _CAP_LK KC_LOCKING_CAPS
+#define _CAP_LK KC_CAPSLOCK
 
 #define _NUM_LK DF(_NUMBERS)
 #define _N_UNLK DF(_QWERTY)

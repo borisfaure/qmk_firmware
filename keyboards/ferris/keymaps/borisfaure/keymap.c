@@ -196,6 +196,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (get_highest_layer(layer_state) == _TMUX) {
         return process_record_tmux(keycode, record);
     }
+    if (host_keyboard_led_state().caps_lock) {
+        // In case of caps lock, change behaviour of those keys
+        switch (keycode) {
+            case ESC_LSH:
+                if (record->event.pressed) {
+                    // unlock caps lock
+                    SEND_STRING(SS_TAP(X_CAPSLOCK));
+                }
+                return false;
+            case TAB_LWR:
+                if (record->event.pressed) {
+                    // send underscore
+                    SEND_STRING("_");
+                }
+                return false;
+        }
+    }
     switch (keycode) {
         case _A_GRV_:
             if (record->event.pressed) {
