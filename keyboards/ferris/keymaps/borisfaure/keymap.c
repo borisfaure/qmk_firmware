@@ -25,7 +25,11 @@ POSSIBILITY OF SUCH DAMAGE.
 */
 
 #include QMK_KEYBOARD_H
+#ifdef MOUSEKEY_ENABLE
+#    include "mousekey.h"
+#endif
 #include "keycodes.h"
+#include "print.h"
 
 enum ferris_layers {
     _QWERTY,
@@ -100,13 +104,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
   [_MISC] = LAYOUT( \
 //---------+---------+---------+---------+---------         ---------+---------+---------+---------+---------//
-   _PAUSE_ , _______ , _______ , _______ , _______     ,     _______ , _______ , _______ , _______ , _M_W_UP ,
+   _PAUSE_ , _______ , _______ , _______ , _______     ,     _M_UP_L , _M_UP_R , _______ , _______ , _M_W_UP ,
 //---------+---------+---------+---------+---------         ---------+---------+---------+---------+---------//
    _______ , _VOL_DN , _MUTE__ , _VOL_UP , _______     ,     _M_LEFT , _M_DOWN , _M_UP__ , _M_RIGH , _M_WCLK ,
 //---------+---------+---------+---------+---------         ---------+---------+---------+---------+---------//
-   _______ , _NXT_TR , _PLAY__ , _PRV_TR , _______     ,     _______ , _______ , _______ , _______ , _M_W_DN ,
+   _______ , _NXT_TR , _PLAY__ , _PRV_TR , _______     ,     _M_DN_L , _M_DN_R , _______ , _______ , _M_W_DN ,
 //---------+---------+---------+---------+---------         ---------+---------+---------+---------+---------//
-                                 _M_ADEC , _M_RCLK     ,     _M_CLK_ , _M_AINC
+                                 _______ , _M_RCLK     ,     _M_CLK_ , _______
                               //---------+---------+---+---+---------+---------//
 ),
   [_TMUX] = LAYOUT( \
@@ -192,6 +196,52 @@ static bool process_record_tmux(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
+#ifdef MOUSEKEY_ENABLE
+// process diagonal mouse keys
+static bool process_record_diagonal_mouse(uint16_t     keycode,
+                                          keyrecord_t *record) {
+    switch (keycode) {
+        case _M_UP_L:
+            if (record->event.pressed) {
+                register_code(KC_MS_UP);
+                register_code(KC_MS_LEFT);
+            } else {
+                unregister_code(KC_MS_UP);
+                unregister_code(KC_MS_LEFT);
+            }
+            break;
+        case _M_UP_R:
+            if (record->event.pressed) {
+                register_code(KC_MS_UP);
+                register_code(KC_MS_RIGHT);
+            } else {
+                unregister_code(KC_MS_UP);
+                unregister_code(KC_MS_RIGHT);
+            }
+            break;
+        case _M_DN_L:
+            if (record->event.pressed) {
+                register_code(KC_MS_UP);
+                register_code(KC_MS_RIGHT);
+            } else {
+                unregister_code(KC_MS_UP);
+                unregister_code(KC_MS_RIGHT);
+            }
+            break;
+        case _M_DN_R:
+            if (record->event.pressed) {
+                register_code(KC_MS_UP);
+                register_code(KC_MS_RIGHT);
+            } else {
+                unregister_code(KC_MS_UP);
+                unregister_code(KC_MS_RIGHT);
+            }
+            break;
+    }
+    return false;
+}
+#endif
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (get_highest_layer(layer_state) == _TMUX) {
         return process_record_tmux(keycode, record);
@@ -213,6 +263,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 return false;
         }
     }
+#ifdef MOUSEKEY_ENABLE
+    if (_M_UP_L <= keycode && keycode <= _M_DN_R) {
+        return process_record_diagonal_mouse(keycode, record);
+    }
+#endif
     switch (keycode) {
         case _A_GRV_:
             if (record->event.pressed) {

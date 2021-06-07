@@ -189,8 +189,6 @@ enum custom_keycodes {
     _C_CED_,               // ç
     __OE___,               // œ
     _EURO__,               // €
-    _M_AINC,               // Mouse acceleration increase
-    _M_ADEC,               // Mouse acceleration decrease
     _T_NEW_,               // tmux new
     _T_PREV,               // tmux prev-window
     _T_NEXT,               // tmux next-window
@@ -211,4 +209,10 @@ enum custom_keycodes {
     _T_8___,               // tmux select-window -t 8
     _T_9___,               // tmux select-window -t 9
     _T_0___,               // tmux select-window -t 0
+#ifdef MOUSEKEY_ENABLE
+    _M_UP_L,  // mouse up left
+    _M_UP_R,  // mouse up right
+    _M_DN_L,  // mouse down left
+    _M_DN_R,  // mouse down right
+#endif
 };
