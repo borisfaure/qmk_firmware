@@ -36,18 +36,29 @@ There are few layers:
   are close together like the parentheses, the square and curly brackets.
   Pressing the I key does a Shift-Insert.
 * RAISE layer, activate with the right thumb is used to easily enter french
-  characters and to be able to type the z character.  It also features the
-  arrow keys under the right homerow (hjkl). It also has the CapsLock and
+  characters and to be able to type the `z` character.  It also features the
+  arrow keys under the right homerow (`hjkl`). It also has the CapsLock and
   NumLock keys.
-* NUMBERS layer, activated by holding the N or B keys, or activating NumLock.
-  It features on the left hand a numpad and the Fn keys on the right hand.
-* MISC layer, activated by holding the T or Y keys.  It has audio related
+* NUMBERS layer, activated by holding the `N` or `B` keys, or activating
+  NumLock.  It features on the left hand a numpad and the Fx keys on the right
+  hand.
+* MISC layer, activated by holding the `T` or `Y` keys.  It has audio related
   actions on the left hand and mouse control on the right hand.  The thumb
-  keys are used to handle mouse acceleration or clicks.  The keys on the outer
-  right mimic a mouse wheel.
-* TMUX layer, activated by holding the F key.  It is used to ease combos on
+  keys are used to handle mouse clicks.  The keys on the outer right mimic a
+  mouse wheel.
+* TMUX layer, activated by holding the `F` key.  It is used to ease combos on
   tmux, the terminal multiplexer.
 
-* Have Q/P to act as Ctrl when held. Same for Z// to act as Shift and W/O to
-act as GUI, X/. as LeftAlt
-* LOWER acts as Tab if tapped, Raise acts as Backspace
+When held, the following keys act as a modifier:
+
+* `Escape` (in place of `Z` on qwerty) is Left Shift, `/` is Right Shift
+* `A` is Left Control, `;` is Right Control
+* `W` is Left Win, `O` is Right Win
+* `X` and `'` are both Left Alt
+* Right Alt is Space on the RAISE layer
+
+The four thumbs buttons are used as follows:
+* Inner Left is the LOWER layer when held, Tab when tapped
+* Outer Left is Space
+* Outer Right is Enter
+* Inner Right is the RAISE layer when held, Backspace when tapped
