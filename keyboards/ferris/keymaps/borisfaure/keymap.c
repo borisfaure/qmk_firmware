@@ -242,6 +242,14 @@ static bool process_record_diagonal_mouse(uint16_t     keycode,
 }
 #endif
 
+#ifdef RGB_MATRIX_ENABLE
+void keyboard_post_init_user(void) {
+    // Set RGB to known state
+    rgb_matrix_enable();
+    rgb_matrix_set_color_all(RGB_GOLD);
+}
+#endif
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (get_highest_layer(layer_state) == _TMUX) {
         return process_record_tmux(keycode, record);
@@ -394,3 +402,35 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     return true;
 }
+
+#ifdef RGB_MATRIX_ENABLE
+void rgb_matrix_indicators_user(void) {
+    if (!rgb_matrix_is_enabled()) return;
+    switch (get_highest_layer(layer_state)) {
+        case _QWERTY:
+            if (get_mods()) {
+                rgb_matrix_set_color_all(RGB_BLUE);
+            } else if (host_keyboard_led_state().caps_lock) {
+                rgb_matrix_set_color_all(RGB_RED);
+            } else {
+                rgb_matrix_set_color_all(RGB_OFF);
+            }
+            break;
+        case _LOWER:
+            rgb_matrix_set_color_all(RGB_GREEN);
+            break;
+        case _RAISE:
+            rgb_matrix_set_color_all(RGB_ORANGE);
+            break;
+        case _NUMBERS:
+            rgb_matrix_set_color_all(RGB_PURPLE);
+            break;
+        case _MISC:
+            rgb_matrix_set_color_all(RGB_TEAL);
+            break;
+        case _TMUX:
+            rgb_matrix_set_color_all(RGB_CORAL);
+            break;
+    }
+}
+#endif

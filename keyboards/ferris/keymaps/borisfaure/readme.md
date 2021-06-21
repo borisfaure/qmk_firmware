@@ -61,4 +61,8 @@ The four thumbs buttons are used as follows:
 * Inner Left is the LOWER layer when held, Tab when tapped
 * Outer Left is Space
 * Outer Right is Enter
-* Inner Right is the RAISE layer when held, Backspace when tapped
+* Inner Right is the RAISE layer when held, Backspace when tapped.
+
+
+On the Bling keyboard, have rgb underglow different based on current layer or
+actived mods.
