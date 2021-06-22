@@ -22,5 +22,5 @@ SpaceBeforeParens: ControlStatements
 SpaceInEmptyParentheses: 'false'
 TabWidth: '4'
 UseTab: Never
-
+ColumnLimit: 76
 ...

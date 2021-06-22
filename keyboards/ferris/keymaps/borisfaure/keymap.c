@@ -106,7 +106,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //---------+---------+---------+---------+---------         ---------+---------+---------+---------+---------//
    _PAUSE_ , _______ , _______ , _______ , _______     ,     _M_UP_L , _M_UP_R , _______ , _______ , _M_W_UP ,
 //---------+---------+---------+---------+---------         ---------+---------+---------+---------+---------//
-   _______ , _VOL_DN , _MUTE__ , _VOL_UP , _______     ,     _M_LEFT , _M_DOWN , _M_UP__ , _M_RIGH , _M_WCLK ,
+   RGB_MOD , _VOL_DN , _MUTE__ , _VOL_UP , _______     ,     _M_LEFT , _M_DOWN , _M_UP__ , _M_RIGH , _M_WCLK ,
 //---------+---------+---------+---------+---------         ---------+---------+---------+---------+---------//
    _RGB_TG , _NXT_TR , _PLAY__ , _PRV_TR , _______     ,     _M_DN_L , _M_DN_R , _______ , _______ , _M_W_DN ,
 //---------+---------+---------+---------+---------         ---------+---------+---------+---------+---------//
@@ -412,7 +412,7 @@ void rgb_matrix_indicators_user(void) {
                 rgb_matrix_set_color_all(RGB_BLUE);
             } else if (host_keyboard_led_state().caps_lock) {
                 rgb_matrix_set_color_all(RGB_RED);
-            } else {
+            } else if (rgb_matrix_get_mode() <= RGB_MATRIX_SOLID_COLOR) {
                 rgb_matrix_set_color_all(RGB_OFF);
             }
             break;
