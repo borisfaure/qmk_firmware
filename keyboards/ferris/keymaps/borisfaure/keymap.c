@@ -33,6 +33,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 enum ferris_layers {
     _QWERTY,
+    _GAMING,
     _LOWER,
     _RAISE,
     _NUMBERS,
@@ -65,6 +66,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    _A_CTL_ , ___S___ , ___D___ , _F_TMUX , ___G___     ,     ___H___ , ___J___ , ___K___ , ___L___ , _SC_CTR ,
 //---------+---------+---------+---------+---------         ---------+---------+---------+---------+---------//
    ESC_LSH , _X_ALT_ , ___C___ , ___V___ , _B_NUM_     ,     _N_NUM_ , ___M___ , _COMMA_ , DOT_ALT , SLS_RSH ,
+//---------+---------+---------+---------+---------         ---------+---------+---------+---------+---------//
+                                 TAB_LWR , _SPACE_     ,     _ENTER_ , _BS_RSE
+                              //---------+---------+---+---+---------+---------//
+),
+[_GAMING] = LAYOUT(
+//---------+---------+---------+---------+---------         ---------+---------+---------+---------+---------//
+   ___Q___ , ___W___ , ___E___ , ___R___ , ___T___     ,     ___Y___ , ___U___ , ___I___ , _O_GUI_ , ___P___ ,
+//---------+---------+---------+---------+---------         ---------+---------+---------+---------+---------//
+   ___A___ , ___S___ , ___D___ , ___F___ , ___G___     ,     ___H___ , ___J___ , ___K___ , ___L___ , _SC_CTR ,
+//---------+---------+---------+---------+---------         ---------+---------+---------+---------+---------//
+   ESC_LSH , ___X___ , ___C___ , ___V___ , ___B___     ,     _N_NUM_ , ___M___ , _COMMA_ , DOT_ALT , SLS_RSH ,
 //---------+---------+---------+---------+---------         ---------+---------+---------+---------+---------//
                                  TAB_LWR , _SPACE_     ,     _ENTER_ , _BS_RSE
                               //---------+---------+---+---+---------+---------//
@@ -104,7 +116,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
   [_MISC] = LAYOUT( \
 //---------+---------+---------+---------+---------         ---------+---------+---------+---------+---------//
-   _PAUSE_ , _______ , _______ , _______ , _______     ,     _M_UP_L , _M_UP_R , _______ , _______ , _M_W_UP ,
+   _PAUSE_ , _GAME__ , _______ , _______ , _______     ,     _M_UP_L , _M_UP_R , _______ , _______ , _M_W_UP ,
 //---------+---------+---------+---------+---------         ---------+---------+---------+---------+---------//
    RGB_MOD , _VOL_DN , _MUTE__ , _VOL_UP , _______     ,     _M_LEFT , _M_DOWN , _M_UP__ , _M_RIGH , _M_WCLK ,
 //---------+---------+---------+---------+---------         ---------+---------+---------+---------+---------//
@@ -250,6 +262,23 @@ void keyboard_post_init_user(void) {
 }
 #endif
 
+static void set_gaming_mode(void) {
+    default_layer_set(_GAMING);
+    layer_on(_GAMING);
+#ifdef RGB_MATRIX_ENABLE
+    rgb_matrix_mode_noeeprom(RGB_MATRIX_BREATHING);
+    rgb_matrix_set_color_all(RGB_GREEN);
+#endif
+}
+static void unset_gaming_mode(void) {
+    default_layer_set(_QWERTY);
+    layer_off(_GAMING);
+#ifdef RGB_MATRIX_ENABLE
+    rgb_matrix_set_color_all(RGB_GOLD);
+    rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
+#endif
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (get_highest_layer(layer_state) == _TMUX) {
         return process_record_tmux(keycode, record);
@@ -277,6 +306,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
 #endif
     switch (keycode) {
+        case _GAME__:
+            if (record->event.pressed) {
+                set_gaming_mode();
+            }
+            return false;
+        case __BSPC_:
+            if (record->event.pressed && default_layer_state == _GAMING) {
+                unset_gaming_mode();
+                return false;
+            }
+            break;
         case _A_GRV_:
             if (record->event.pressed) {
                 if (get_mods() & MOD_BIT(KC_LSFT)) {

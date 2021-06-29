@@ -211,6 +211,7 @@ enum custom_keycodes {
     _T_8___,               // tmux select-window -t 8
     _T_9___,               // tmux select-window -t 9
     _T_0___,               // tmux select-window -t 0
+    _GAME__,               // switch keyboard to gaming mode
 #ifdef MOUSEKEY_ENABLE
     _M_UP_L,  // mouse up left
     _M_UP_R,  // mouse up right
